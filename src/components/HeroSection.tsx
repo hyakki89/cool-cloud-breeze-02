@@ -50,7 +50,7 @@ const HeroSection = () => {
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
                 <span className="text-lg text-gray-500 line-through mr-2">79€</span>
-                49€
+                19€
               </div>
               <div className="text-sm text-gray-600">Livraison gratuite 🚚</div>
             </div>
