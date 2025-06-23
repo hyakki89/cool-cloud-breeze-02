@@ -53,21 +53,6 @@ const CTASection = () => {
             </div>
           </div>
 
-          {/* Bonus */}
-          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-12">
-            {[
-              { icon: "🎁", title: "Bonus offert", desc: "Guide d'utilisation premium" },
-              { icon: "🚚", title: "Livraison express", desc: "Reçois-le en 24-48h" },
-              { icon: "💝", title: "Garantie totale", desc: "30 jours satisfait ou remboursé" }
-            ].map((item, index) => (
-              <div key={index} className="bg-white/50 backdrop-blur-sm rounded-2xl p-4 border border-white/30">
-                <div className="text-2xl mb-2">{item.icon}</div>
-                <div className="font-semibold text-gray-800 text-sm">{item.title}</div>
-                <div className="text-xs text-gray-600">{item.desc}</div>
-              </div>
-            ))}
-          </div>
-
           {/* Countdown timer simulé */}
           <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-2xl p-6 max-w-md mx-auto">
             <div className="text-red-700 font-semibold mb-2">⏰ Offre limitée dans le temps !</div>
