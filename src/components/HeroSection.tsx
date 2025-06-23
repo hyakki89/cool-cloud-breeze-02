@@ -36,7 +36,7 @@ const HeroSection = () => {
           <div className="relative mb-12 animate-fade-in-up" style={{animationDelay: '0.6s'}}>
             <div className="relative inline-block">
               <img 
-                src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=800&q=80" 
+                src="/lovable-uploads/9bda1dac-f712-40e6-9bfd-9fc5c701f044.png" 
                 alt="Ventilateur de cou portable" 
                 className="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl shadow-sky-blue/20 animate-float"
               />
