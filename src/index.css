@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,6 +100,24 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gradient-to-br from-cloud-white via-mint-fresh to-lavender text-foreground font-rounded;
+  }
+}
+
+@layer components {
+  .gradient-cloud {
+    @apply bg-gradient-to-r from-sky-blue via-lavender to-pastel-pink;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-sky-blue via-purple-500 to-pastel-pink bg-clip-text text-transparent;
+  }
+  
+  .card-cloud {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg shadow-sky-blue/10;
+  }
+  
+  .btn-cloud {
+    @apply bg-gradient-to-r from-sky-blue to-pastel-pink hover:from-pastel-pink hover:to-sky-blue transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
   }
 }
