@@ -35,7 +35,7 @@ const CTASection = () => {
               <div className="text-sm text-gray-500 mb-2">Prix de lancement ✨</div>
               <div className="flex items-center justify-center gap-4 mb-4">
                 <span className="text-2xl text-gray-400 line-through">29€</span>
-                <span className="text-4xl font-bold gradient-text">49€</span>
+                <span className="text-4xl font-bold gradient-text">19€</span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-38%</span>
               </div>
               <div className="text-sm text-gray-600">+ Livraison gratuite en France 🚚</div>
