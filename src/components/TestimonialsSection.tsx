@@ -1,31 +1,24 @@
-
 const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Emma L.",
-      location: "Paris",
-      rating: 5,
-      comment: "Parfait pour mes trajets en métro l'été ! Discret et vraiment efficace 😍",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=150&q=80"
-    },
-    {
-      name: "Lucas M.",
-      location: "Lyon", 
-      rating: 5,
-      comment: "Je l'utilise pour mes sessions de running, c'est révolutionnaire ! Fini les pauses forcées.",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
-    },
-    {
-      name: "Sarah K.",
-      location: "Marseille",
-      rating: 5,
-      comment: "Stylé et pratique ! Mes collègues me demandent tous où je l'ai acheté 💨",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
-    }
-  ];
-
-  return (
-    <section className="py-20 px-4 relative">
+  const testimonials = [{
+    name: "Emma L.",
+    location: "Paris",
+    rating: 5,
+    comment: "Parfait pour mes trajets en métro l'été ! Discret et vraiment efficace 😍",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=150&q=80"
+  }, {
+    name: "Lucas M.",
+    location: "Lyon",
+    rating: 5,
+    comment: "Je l'utilise pour mes sessions de running, c'est révolutionnaire ! Fini les pauses forcées.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+  }, {
+    name: "Sarah K.",
+    location: "Marseille",
+    rating: 5,
+    comment: "Stylé et pratique ! Mes collègues me demandent tous où je l'ai acheté 💨",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
+  }];
+  return <section className="py-20 px-4 relative">
       {/* Fond avec nuages */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-lavender/20 via-transparent to-pastel-pink/20"></div>
@@ -44,13 +37,10 @@ const TestimonialsSection = () => {
 
         {/* Grille de témoignages */}
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="card-cloud rounded-3xl p-6 hover:scale-105 transition-all duration-300">
+          {testimonials.map((testimonial, index) => <div key={index} className="card-cloud rounded-3xl p-6 hover:scale-105 transition-all duration-300">
               {/* Étoiles */}
               <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-lg">⭐</span>
-                ))}
+                {[...Array(testimonial.rating)].map((_, i) => <span key={i} className="text-yellow-400 text-lg">⭐</span>)}
               </div>
 
               {/* Commentaire */}
@@ -60,18 +50,13 @@ const TestimonialsSection = () => {
 
               {/* Profil client */}
               <div className="flex items-center gap-3">
-                <img 
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-sky-blue/20"
-                />
+                <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-sky-blue/20" />
                 <div>
                   <div className="font-semibold text-gray-800">{testimonial.name}</div>
                   <div className="text-sm text-gray-500">{testimonial.location}</div>
                 </div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         {/* Stats sociaux */}
@@ -85,10 +70,7 @@ const TestimonialsSection = () => {
               <span className="text-2xl">⭐</span>
               <span><strong className="text-gray-800">4.9/5</strong> note moyenne</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">📦</span>
-              <span><strong className="text-gray-800">Livraison</strong> en 24-48h</span>
-            </div>
+            
           </div>
         </div>
 
@@ -99,8 +81,6 @@ const TestimonialsSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TestimonialsSection;

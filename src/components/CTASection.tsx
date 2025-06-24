@@ -1,16 +1,15 @@
-
 import { Button } from "@/components/ui/button";
-
 const CTASection = () => {
-  return (
-    <section className="py-20 px-4 relative overflow-hidden">
+  return <section className="py-20 px-4 relative overflow-hidden">
       {/* Fond dégradé dramatique */}
       <div className="absolute inset-0 bg-gradient-to-br from-sky-blue via-lavender to-pastel-pink opacity-10"></div>
       
       {/* Nuages animés */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-1/4 w-60 h-30 bg-white/20 rounded-full blur-2xl animate-float"></div>
-        <div className="absolute bottom-20 right-1/4 w-80 h-40 bg-lavender/20 rounded-full blur-3xl animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute bottom-20 right-1/4 w-80 h-40 bg-lavender/20 rounded-full blur-3xl animate-float" style={{
+        animationDelay: '1.5s'
+      }}></div>
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -35,7 +34,7 @@ const CTASection = () => {
             <div className="text-center mb-6">
               <div className="text-sm text-gray-500 mb-2">Prix de lancement ✨</div>
               <div className="flex items-center justify-center gap-4 mb-4">
-                <span className="text-2xl text-gray-400 line-through">79€</span>
+                <span className="text-2xl text-gray-400 line-through">29€</span>
                 <span className="text-4xl font-bold gradient-text">49€</span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-38%</span>
               </div>
@@ -73,8 +72,6 @@ const CTASection = () => {
           </div>
         </div>
       </footer>
-    </section>
-  );
+    </section>;
 };
-
 export default CTASection;
