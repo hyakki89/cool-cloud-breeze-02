@@ -36,7 +36,7 @@ const CTASection = () => {
               <div className="flex items-center justify-center gap-4 mb-4">
                 <span className="text-2xl text-gray-400 line-through">29€</span>
                 <span className="text-4xl font-bold gradient-text">19€</span>
-                <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-38%</span>
+                <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">-34%</span>
               </div>
               <div className="text-sm text-gray-600">+ Livraison gratuite en France 🚚</div>
             </div>
@@ -47,9 +47,7 @@ const CTASection = () => {
               <span className="ml-2 group-hover:translate-x-2 transition-transform">🌟</span>
             </Button>
 
-            <div className="text-xs text-gray-500">
-              Paiement 100% sécurisé • Garantie satisfait ou remboursé 30 jours
-            </div>
+            <div className="text-xs text-gray-500">Paiement 100% sécurisé • Garantie satisfait ou remboursé 15 jours</div>
           </div>
 
           {/* Countdown timer simulé */}
