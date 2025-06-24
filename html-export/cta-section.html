@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTA Section</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cta-styles.css">
 </head>
 <body>
     <section class="cta-section">
@@ -77,5 +77,38 @@
             </div>
         </footer>
     </section>
+
+    <script>
+        // Countdown timer simulation
+        function updateCountdown() {
+            const timer = document.querySelector('.timer-display');
+            if (timer) {
+                const now = new Date().getTime();
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const distance = tomorrow - now;
+                
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Mettre à jour le countdown chaque seconde
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Gestion des clics sur les boutons CTA
+        document.querySelectorAll('.main-cta-button').forEach(button => {
+            button.addEventListener('click', () => {
+                console.log('Rediriger vers la page de commande');
+                // window.location.href = '/checkout';
+            });
+        });
+    </script>
 </body>
 </html>
