@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -75,8 +74,8 @@ const Product = () => {
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4">
         <div className="text-sm text-gray-600">
-          <a href="/" className="text-blue-400 hover:underline">Accueil</a> > 
-          <a href="/product" className="text-blue-400 hover:underline ml-1">Produits</a> > 
+          <a href="/" className="text-blue-400 hover:underline">Accueil</a> &gt; 
+          <a href="/product" className="text-blue-400 hover:underline ml-1">Produits</a> &gt; 
           <span className="ml-1">Ventilateur de Cou Portable</span>
         </div>
       </div>
