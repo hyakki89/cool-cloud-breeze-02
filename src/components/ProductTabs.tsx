@@ -19,16 +19,17 @@ const ProductTabs = () => {
             <CardContent className="p-6">
               <h3 className="text-2xl font-bold mb-4">Description du produit</h3>
               <p className="text-gray-700 mb-6">
-                Le ventilateur de cou portable FreshBreeze est la solution parfaite pour rester au frais pendant vos activités. 
-                Grâce à sa conception ergonomique et ses fonctionnalités avancées, il s'adapte à tous vos besoins.
+                La Zen Ring est une bague connectée Bluetooth révolutionnaire qui transforme votre façon d'interagir avec vos appareils. 
+                Grâce à ses gestes tactiles intuitifs et son design minimaliste, elle devient l'accessoire indispensable de votre quotidien numérique.
               </p>
-              <h4 className="text-lg font-semibold mb-3">Avantages clés :</h4>
+              <h4 className="text-lg font-semibold mb-3">Fonctionnalités clés :</h4>
               <ul className="space-y-2 text-gray-700">
-                <li>🔇 Ultra silencieux - Moins de 30dB</li>
-                <li>🔋 Autonomie exceptionnelle - Jusqu'à 10 heures</li>
-                <li>🎧 Design mains libres pour une liberté totale</li>
-                <li>⚡ 3 vitesses réglables selon vos besoins</li>
-                <li>🎯 Conception ergonomique universelle</li>
+                <li>📱 Contrôle des réseaux sociaux (TikTok, Instagram, YouTube)</li>
+                <li>🎶 Gestion de la musique et du volume</li>
+                <li>📸 Déclencheur photo/vidéo à distance</li>
+                <li>🔋 Autonomie 72h + boîtier de recharge inclus</li>
+                <li>📖 Navigation intuitive pour lire des e-books</li>
+                <li>🎯 Compatible iOS et Android</li>
               </ul>
             </CardContent>
           </Card>
@@ -40,14 +41,14 @@ const ProductTabs = () => {
               <h3 className="text-2xl font-bold mb-4">Caractéristiques techniques</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {[
-                  { label: "Dimensions", value: "18 x 16 x 4 cm" },
-                  { label: "Poids", value: "280g" },
-                  { label: "Batterie", value: "4000mAh Li-ion" },
-                  { label: "Autonomie", value: "4-10 heures selon vitesse" },
-                  { label: "Temps de charge", value: "3 heures" },
-                  { label: "Vitesses", value: "3 niveaux réglables" },
-                  { label: "Niveau sonore", value: "< 30dB" },
-                  { label: "Matériaux", value: "ABS + Silicone" }
+                  { label: "Dimensions", value: "Taille unique ajustable" },
+                  { label: "Poids", value: "8g ultra-léger" },
+                  { label: "Batterie", value: "Lithium-ion rechargeable" },
+                  { label: "Autonomie", value: "72 heures d'utilisation" },
+                  { label: "Temps de charge", value: "2 heures (boîtier inclus)" },
+                  { label: "Connectivité", value: "Bluetooth 5.0" },
+                  { label: "Compatibilité", value: "iOS et Android" },
+                  { label: "Matériaux", value: "Titane et silicone médical" }
                 ].map((spec, index) => (
                   <div key={index} className="bg-white/60 p-3 rounded-lg">
                     <strong>{spec.label}:</strong> {spec.value}
@@ -73,9 +74,9 @@ const ProductTabs = () => {
 
               <div className="space-y-4">
                 {[
-                  { name: "Emma L.", date: "Il y a 2 jours", text: "Parfait pour mes trajets en métro l'été ! Discret et vraiment efficace 😍" },
-                  { name: "Lucas M.", date: "Il y a 5 jours", text: "Je l'utilise pour mes sessions de running, c'est révolutionnaire ! Fini les pauses forcées." },
-                  { name: "Sarah K.", date: "Il y a 1 semaine", text: "Stylé et pratique ! Mes collègues me demandent tous où je l'ai acheté 💨" }
+                  { name: "Emma L.", date: "Il y a 2 jours", text: "Géniale pour scroller sur TikTok sans lever le bras ! Design super discret 💍" },
+                  { name: "Lucas M.", date: "Il y a 5 jours", text: "Perfect pour mes photos Instagram ! Plus besoin de minuteur, je contrôle tout avec ma bague ⚡" },
+                  { name: "Sarah K.", date: "Il y a 1 semaine", text: "Révolutionnaire ! Je contrôle ma musique pendant le sport, mes collègues sont jaloux 🎶" }
                 ].map((review, index) => (
                   <div key={index} className="bg-white/60 p-4 rounded-lg">
                     <div className="flex justify-between items-center mb-2">

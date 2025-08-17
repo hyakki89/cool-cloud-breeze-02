@@ -7,30 +7,30 @@ const RelatedProducts = () => {
   const relatedProducts = [
     {
       id: 1,
-      name: "Ventilateur USB Portable",
-      price: 16.99,
-      oldPrice: 24.99,
-      image: "https://images.unsplash.com/photo-1621768216002-5ac171876625?auto=format&fit=crop&w=300&q=80",
-      badge: "Nouveau"
+      name: "Écouteurs Bluetooth Minimalistes",
+      price: 29.99,
+      oldPrice: 39.99,
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80",
+      badge: "Populaire"
     },
     {
       id: 2,
-      name: "Ventilateur de Table",
-      price: 34.99,
-      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=300&q=80"
+      name: "Montre Connectée Smart",
+      price: 89.99,
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
     },
     {
       id: 3,
-      name: "Ventilateur Personnel",
-      price: 12.99,
-      oldPrice: 19.99,
-      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80"
+      name: "Tracker Fitness Discret",
+      price: 39.99,
+      oldPrice: 59.99,
+      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=300&q=80"
     }
   ];
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-8">Produits similaires</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">Accessoires complémentaires</h2>
       <div className="grid md:grid-cols-3 gap-6">
         {relatedProducts.map((product) => (
           <Card key={product.id} className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow cursor-pointer">

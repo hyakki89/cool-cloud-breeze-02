@@ -17,24 +17,24 @@ const HeroSection = () => {
           {/* Badge "Nouveau Produit" */}
           <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 mb-8 animate-fade-in-up">
             <span className="w-2 h-2 bg-sky-blue rounded-full animate-pulse-soft"></span>
-            <span className="text-sm font-medium text-gray-700">Nouveau produit tendance ✨</span>
+            <span className="text-sm font-medium text-gray-700">Innovation technologique ⚡</span>
           </div>
 
           {/* Accroche principale */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up" style={{
           animationDelay: '0.2s'
         }}>
-            <span className="gradient-text">Reste frais</span>
+            <span className="gradient-text">Contrôle tout</span>
             <br />
-            <span className="text-gray-800">sans transpirer !</span>
+            <span className="text-gray-800">d'un simple geste !</span>
           </h1>
 
           {/* Sous-titre */}
           <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-fade-in-up" style={{
           animationDelay: '0.4s'
         }}>
-            Le ventilateur de cou portable qui révolutionne ton été. 
-            Mains libres, silencieux et ultra-stylé ☁️
+            La bague connectée qui révolutionne ton quotidien digital. 
+            Swipe, contrôle et capture sans jamais toucher ton écran 💍
           </p>
 
           {/* Image produit principale */}
@@ -42,7 +42,7 @@ const HeroSection = () => {
           animationDelay: '0.6s'
         }}>
             <div className="relative inline-block">
-              <img src="/lovable-uploads/9bda1dac-f712-40e6-9bfd-9fc5c701f044.png" alt="Ventilateur de cou portable" className="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl shadow-sky-blue/20 animate-float" />
+              <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" alt="Zen Ring - Bague connectée Bluetooth" className="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl shadow-sky-blue/20 animate-float" />
               {/* Effet de brillance */}
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-3xl"></div>
             </div>
@@ -61,7 +61,7 @@ const HeroSection = () => {
             </div>
             
             <Button className="btn-cloud text-white font-semibold py-4 px-8 rounded-full text-lg border-0 group">
-              Je veux rester frais ☁️
+              Je veux ma Zen Ring ⚡
               <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </Button>
           </div>

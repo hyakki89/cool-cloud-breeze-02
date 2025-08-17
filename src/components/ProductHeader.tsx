@@ -14,7 +14,7 @@ const ProductHeader = ({ cartCount }: ProductHeaderProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent">
-              FreshBreeze ☁️
+              Zen Ring ⚡
             </h1>
             <nav className="hidden md:flex space-x-6">
               <a href="/" className="text-gray-700 hover:text-blue-400 transition-colors">Accueil</a>

@@ -13,7 +13,7 @@ const ProductImage = ({ productImages, selectedImage, onImageSelect }: ProductIm
       <div className="relative bg-white rounded-2xl p-4 shadow-lg">
         <img
           src={productImages[selectedImage]}
-          alt="Ventilateur de cou portable"
+          alt="Zen Ring - Bague connectée Bluetooth"
           className="w-full h-96 object-cover rounded-xl"
         />
         <div className="absolute top-6 left-6 space-y-2">

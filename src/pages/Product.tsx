@@ -14,15 +14,15 @@ const Product = () => {
   const [cartCount, setCartCount] = useState(0);
 
   const productImages = [
-    "/lovable-uploads/9bda1dac-f712-40e6-9bfd-9fc5c701f044.png",
-    "https://images.unsplash.com/photo-1621768216002-5ac171876625?auto=format&fit=crop&w=300&q=80",
-    "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=300&q=80",
-    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80"
+    "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=400&q=80",
+    "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=400&q=80"
   ];
 
   const handleAddToCart = () => {
     setCartCount(cartCount + quantity);
-    alert(`${quantity} ventilateur(s) ${selectedColor} ajouté(s) au panier !`);
+    alert(`${quantity} Zen Ring ${selectedColor} ajoutée(s) au panier !`);
   };
 
   return (
@@ -34,7 +34,7 @@ const Product = () => {
         <div className="text-sm text-gray-600">
           <a href="/" className="text-blue-400 hover:underline">Accueil</a> &gt; 
           <a href="/product" className="text-blue-400 hover:underline ml-1">Produits</a> &gt; 
-          <span className="ml-1">Ventilateur de Cou Portable</span>
+          <span className="ml-1">Zen Ring - Bague Connectée</span>
         </div>
       </div>
 

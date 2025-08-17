@@ -5,8 +5,8 @@ const ProductFooter = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">FreshBreeze</h3>
-            <p className="text-gray-400">Reste frais, reste stylé ☁️</p>
+            <h3 className="text-xl font-bold mb-4">Zen Ring</h3>
+            <p className="text-gray-400">Contrôle ton monde ⚡</p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Liens rapides</h4>
@@ -34,7 +34,7 @@ const ProductFooter = () => {
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 FreshBreeze. Tous droits réservés.</p>
+          <p>&copy; 2024 Zen Ring. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

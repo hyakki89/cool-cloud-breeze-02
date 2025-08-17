@@ -16,7 +16,7 @@ const ProductInfo = ({ selectedColor, quantity, onColorSelect, onQuantityChange,
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Ventilateur de Cou Portable</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Zen Ring - Bague Connectée Bluetooth</h1>
         <div className="flex items-center space-x-2 mb-4">
           <div className="flex text-yellow-400">
             {[...Array(5)].map((_, i) => (
@@ -42,8 +42,8 @@ const ProductInfo = ({ selectedColor, quantity, onColorSelect, onQuantityChange,
       </Card>
 
       <p className="text-lg text-gray-700">
-        Le ventilateur de cou portable qui révolutionne ton été ! Mains libres, silencieux et ultra-stylé. 
-        Profite de la fraîcheur sans transpirer où que tu sois.
+        La bague connectée qui révolutionne ton quotidien ! Contrôle tes réseaux sociaux, ta musique et tes photos d'un simple geste. 
+        Design minimaliste et discret pour une technologie innovante à portée de main.
       </p>
 
       {/* Options */}
@@ -54,6 +54,7 @@ const ProductInfo = ({ selectedColor, quantity, onColorSelect, onQuantityChange,
             {[
               { value: 'white', color: 'bg-white border-gray-300' },
               { value: 'black', color: 'bg-gray-900' },
+              { value: 'rose', color: 'bg-pink-400' },
               { value: 'blue', color: 'bg-blue-400' }
             ].map((option) => (
               <button
