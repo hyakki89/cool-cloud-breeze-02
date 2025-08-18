@@ -98,7 +98,7 @@ const ProductInfo = ({ selectedColor, quantity, onColorSelect, onQuantityChange,
         >
           Ajouter au panier - {(19 * quantity).toFixed(2)} €
         </Button>
-        <Button variant="outline" className="w-full py-3 rounded-2xl text-lg">
+        <Button className="w-full bg-gradient-to-r from-blue-400 to-pink-400 hover:from-pink-400 hover:to-blue-400 text-white font-semibold py-3 rounded-2xl text-lg">
           Acheter maintenant
         </Button>
       </div>
