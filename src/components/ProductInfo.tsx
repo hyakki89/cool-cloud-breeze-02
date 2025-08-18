@@ -90,14 +90,8 @@ const ProductInfo = ({ selectedColor, quantity, onColorSelect, onQuantityChange,
         </div>
       </div>
 
-      {/* Add to Cart */}
+      {/* Buy Now */}
       <div className="space-y-3">
-        <Button 
-          onClick={onAddToCart}
-          className="w-full bg-gradient-to-r from-blue-400 to-pink-400 hover:from-pink-400 hover:to-blue-400 text-white font-semibold py-3 rounded-2xl text-lg"
-        >
-          Ajouter au panier - {(19 * quantity).toFixed(2)} €
-        </Button>
         <Button className="w-full bg-gradient-to-r from-blue-400 to-pink-400 hover:from-pink-400 hover:to-blue-400 text-white font-semibold py-3 rounded-2xl text-lg">
           Acheter maintenant
         </Button>
