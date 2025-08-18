@@ -3,19 +3,19 @@ const TestimonialsSection = () => {
     name: "Emma L.",
     location: "Paris",
     rating: 5,
-    comment: "Parfait pour mes trajets en métro l'été ! Discret et vraiment efficace 😍",
+    comment: "Géniale pour scroller sur TikTok sans lever le bras ! Design super discret 💍",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=150&q=80"
   }, {
     name: "Lucas M.",
     location: "Lyon",
     rating: 5,
-    comment: "Je l'utilise pour mes sessions de running, c'est révolutionnaire ! Fini les pauses forcées.",
+    comment: "Perfect pour mes photos Instagram ! Plus besoin de minuteur, je contrôle tout avec ma bague ⚡",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
   }, {
     name: "Sarah K.",
     location: "Marseille",
     rating: 5,
-    comment: "Stylé et pratique ! Mes collègues me demandent tous où je l'ai acheté 💨",
+    comment: "Révolutionnaire ! Je contrôle ma musique pendant le sport, mes collègues sont jaloux 🎶",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"
   }];
   return <section className="py-20 px-4 relative">
@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
             Ils ont testé, ils <span className="gradient-text">approuvent</span> !
           </h2>
           <p className="text-lg text-gray-600">
-            Rejoins les milliers de personnes qui ont adopté leur nouveau compagnon fraîcheur
+            Rejoins les milliers de personnes qui ont adopté leur nouvelle bague connectée
           </p>
         </div>
 
@@ -77,7 +77,7 @@ const TestimonialsSection = () => {
         {/* Call-to-action secondaire */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-green-50 px-6 py-3 rounded-full border border-green-200">
-            <span className="text-green-600 font-medium">📱 Vu sur TikTok, Instagram & YouTube</span>
+            <span className="text-green-600 font-medium">📱 Compatible TikTok, Instagram & YouTube</span>
           </div>
         </div>
       </div>

@@ -1,38 +1,38 @@
 
-import { Battery, Headphones, MicOff } from "lucide-react";
+import { Battery, Smartphone, Camera } from "lucide-react";
 
 const BenefitsSection = () => {
   const benefits = [
     {
-      icon: <MicOff className="w-8 h-8" />,
-      title: "Ultra silencieux",
-      description: "Profite de la fraîcheur sans déranger personne autour de toi",
+      icon: <Smartphone className="w-8 h-8" />,
+      title: "Contrôle total",
+      description: "Swipe TikTok, Instagram, YouTube sans toucher ton écran",
       color: "from-sky-blue to-lavender"
     },
     {
       icon: <Battery className="w-8 h-8" />,
-      title: "10h d'autonomie",
-      description: "Une journée entière de fraîcheur avec une seule charge",
+      title: "72h d'autonomie",
+      description: "3 jours d'utilisation avec le boîtier de recharge inclus",
       color: "from-lavender to-pastel-pink"
     },
     {
-      icon: <Headphones className="w-8 h-8" />,
-      title: "Mains libres",
-      description: "Reste actif pendant que tu te rafraîchis, parfait pour le sport",
+      icon: <Camera className="w-8 h-8" />,
+      title: "Selfies parfaits",
+      description: "Déclenche tes photos et vidéos à distance, fini les selfies ratés",
       color: "from-pastel-pink to-sky-blue"
     }
   ];
 
   const additionalBenefits = [
     {
-      title: "Design ergonomique",
-      description: "S'adapte parfaitement à toutes les morphologies",
-      emoji: "🎯"
+      title: "Design minimaliste",
+      description: "Discret et moderne, personne ne remarquera que tu la portes",
+      emoji: "💍"
     },
     {
-      title: "3 vitesses ajustables",
-      description: "De la brise légère au vent rafraîchissant",
-      emoji: "⚡"
+      title: "Compatible iOS & Android",
+      description: "Fonctionne avec tous les smartphones modernes",
+      emoji: "📱"
     }
   ];
 
@@ -50,7 +50,7 @@ const BenefitsSection = () => {
             Pourquoi tu vas <span className="gradient-text">l'adorer</span> ?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Un concentré de technologie pensé pour ton confort et ton style de vie actif
+            Une bague connectée révolutionnaire qui transforme ton quotidien numérique
           </p>
         </div>
 
@@ -99,11 +99,11 @@ const BenefitsSection = () => {
           <h3 className="text-2xl font-bold mb-8 text-gray-800">Parfait pour :</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "🏃‍♀️ Sport & Running",
-              "🚇 Transports en commun", 
-              "💼 Bureau climatisé",
-              "🎪 Festivals & événements",
-              "🏖️ Plage & vacances"
+              "📱 Réseaux sociaux",
+              "🎶 Contrôle musique", 
+              "📸 Selfies & photos",
+              "📖 Lecture e-books",
+              "🎮 Gaming mobile"
             ].map((item, index) => (
               <span 
                 key={index}

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+
 const CTASection = () => {
-  return <section className="py-20 px-4 relative overflow-hidden">
+  return (
+    <section className="py-20 px-4 relative overflow-hidden">
       {/* Fond dégradé dramatique */}
       <div className="absolute inset-0 bg-gradient-to-br from-sky-blue via-lavender to-pastel-pink opacity-10"></div>
       
@@ -8,8 +10,8 @@ const CTASection = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-1/4 w-60 h-30 bg-white/20 rounded-full blur-2xl animate-float"></div>
         <div className="absolute bottom-20 right-1/4 w-80 h-40 bg-lavender/20 rounded-full blur-3xl animate-float" style={{
-        animationDelay: '1.5s'
-      }}></div>
+          animationDelay: '1.5s'
+        }}></div>
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -22,11 +24,11 @@ const CTASection = () => {
 
           {/* Titre principal */}
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Prêt à dire adieu à la <span className="gradient-text">chaleur</span> ?
+            Prêt à contrôler ton <span className="gradient-text">monde</span> ?
           </h2>
 
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Rejoins la révolution de la fraîcheur portable. Ton été ne sera plus jamais le même ☁️
+            Rejoins la révolution de la technologie portable. Ton quotidien ne sera plus jamais le même ⚡
           </p>
 
           {/* Offre spéciale */}
@@ -43,8 +45,8 @@ const CTASection = () => {
 
             {/* Bouton principal */}
             <Button className="btn-cloud text-white font-bold py-6 px-12 rounded-full text-xl w-full sm:w-auto group mb-4">
-              Je veux rester frais ☁️
-              <span className="ml-2 group-hover:translate-x-2 transition-transform">🌟</span>
+              Je veux ma Zen Ring ⚡
+              <span className="ml-2 group-hover:translate-x-2 transition-transform">💍</span>
             </Button>
 
             <div className="text-xs text-gray-500">Paiement 100% sécurisé • Garantie satisfait ou remboursé 15 jours</div>
@@ -62,7 +64,7 @@ const CTASection = () => {
       {/* Footer simple */}
       <footer className="mt-16 text-center text-gray-500 text-sm">
         <div className="border-t border-gray-200 pt-8">
-          <p>© 2024 FreshBreeze - Reste frais, reste stylé ☁️</p>
+          <p>&copy; 2024 Zen Ring - Contrôle ton monde ⚡</p>
           <div className="flex justify-center gap-6 mt-4">
             <a href="#" className="hover:text-sky-blue transition-colors">Mentions légales</a>
             <a href="#" className="hover:text-sky-blue transition-colors">CGV</a>
@@ -70,6 +72,8 @@ const CTASection = () => {
           </div>
         </div>
       </footer>
-    </section>;
+    </section>
+  );
 };
+
 export default CTASection;
