@@ -1,0 +1,321 @@
+{{ 'section-cta.css' | asset_url | stylesheet_tag }}
+
+<div class="cta-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <!-- Fond dégradé dramatique -->
+  <div class="dramatic-background"></div>
+  
+  <!-- Nuages animés -->
+  <div class="background-clouds">
+    <div class="cloud cloud-cta-1"></div>
+    <div class="cloud cloud-cta-2"></div>
+  </div>
+
+  <div class="page-width">
+    <div class="cta-content">
+      <!-- Badge urgence -->
+      {%- if section.settings.show_urgency_badge -%}
+        <div class="urgency-badge">
+          <span class="urgency-dot"></span>
+          <span class="urgency-text">{{ section.settings.urgency_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Titre principal -->
+      <h2 class="cta-title">
+        {{ section.settings.title_part1 }} <span class="gradient-text">{{ section.settings.title_highlight }}</span> {{ section.settings.title_part2 }}
+      </h2>
+
+      <p class="cta-description">
+        {{ section.settings.description }}
+      </p>
+
+      <!-- Offre spéciale -->
+      <div class="special-offer">
+        <div class="offer-header">
+          {%- if section.settings.launch_price_text != blank -%}
+            <div class="launch-price">{{ section.settings.launch_price_text }}</div>
+          {%- endif -%}
+          <div class="price-comparison">
+            {%- if section.settings.old_price != blank -%}
+              <span class="old-price-large">{{ section.settings.old_price }}</span>
+            {%- endif -%}
+            <span class="current-price-large">{{ section.settings.current_price }}</span>
+            {%- if section.settings.discount_percentage != blank -%}
+              <span class="discount-badge">{{ section.settings.discount_percentage }}</span>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.shipping_text != blank -%}
+            <div class="shipping-info">{{ section.settings.shipping_text }}</div>
+          {%- endif -%}
+        </div>
+
+        <!-- Bouton principal -->
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_url | default: '#' }}" class="main-cta-button">
+            {{ section.settings.cta_text }}
+            <span class="button-star">🌟</span>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.security_text != blank -%}
+          <div class="security-info">{{ section.settings.security_text }}</div>
+        {%- endif -%}
+      </div>
+
+      <!-- Countdown timer -->
+      {%- if section.settings.show_countdown -%}
+        <div class="countdown-timer">
+          <div class="timer-label">{{ section.settings.countdown_label }}</div>
+          <div class="timer-display" id="countdown-display">23:45:12</div>
+          <div class="timer-units">{{ section.settings.countdown_units }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Footer simple -->
+  {%- if section.settings.show_footer -%}
+    <footer class="simple-footer">
+      <div class="footer-content">
+        <p class="footer-copyright">{{ section.settings.footer_text }}</p>
+        <div class="footer-links">
+          {%- if section.settings.footer_link_1_text != blank -%}
+            <a href="{{ section.settings.footer_link_1_url | default: '#' }}" class="footer-link">{{ section.settings.footer_link_1_text }}</a>
+          {%- endif -%}
+          {%- if section.settings.footer_link_2_text != blank -%}
+            <a href="{{ section.settings.footer_link_2_url | default: '#' }}" class="footer-link">{{ section.settings.footer_link_2_text }}</a>
+          {%- endif -%}
+          {%- if section.settings.footer_link_3_text != blank -%}
+            <a href="{{ section.settings.footer_link_3_url | default: '#' }}" class="footer-link">{{ section.settings.footer_link_3_text }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </footer>
+  {%- endif -%}
+</div>
+
+{%- if section.settings.show_countdown -%}
+  <script>
+    // Countdown timer
+    function updateCountdown() {
+      const timer = document.querySelector('#countdown-display');
+      if (timer) {
+        const now = new Date().getTime();
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+        
+        const distance = tomorrow - now;
+        
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }
+
+    // Mettre à jour le countdown chaque seconde
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "CTA Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_badge",
+      "default": true,
+      "label": "Afficher le badge d'urgence"
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "default": "🔥 Stock limité - Plus que quelques pièces",
+      "label": "Texte du badge d'urgence"
+    },
+    {
+      "type": "text",
+      "id": "title_part1",
+      "default": "Prêt à dire adieu à la",
+      "label": "Titre partie 1"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "chaleur",
+      "label": "Titre en surbrillance"
+    },
+    {
+      "type": "text",
+      "id": "title_part2",
+      "default": "?",
+      "label": "Titre partie 2"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Rejoins la révolution de la fraîcheur portable. Ton été ne sera plus jamais le même ☁️",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "launch_price_text",
+      "default": "Prix de lancement ✨",
+      "label": "Texte prix de lancement"
+    },
+    {
+      "type": "text",
+      "id": "old_price",
+      "default": "29€",
+      "label": "Ancien prix"
+    },
+    {
+      "type": "text",
+      "id": "current_price",
+      "default": "19€",
+      "label": "Prix actuel"
+    },
+    {
+      "type": "text",
+      "id": "discount_percentage",
+      "default": "-34%",
+      "label": "Pourcentage de remise"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "default": "+ Livraison gratuite en France 🚚",
+      "label": "Texte livraison"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "Je veux rester frais ☁️",
+      "label": "Texte du bouton principal"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Lien du bouton principal"
+    },
+    {
+      "type": "text",
+      "id": "security_text",
+      "default": "Paiement 100% sécurisé • Garantie satisfait ou remboursé 15 jours",
+      "label": "Texte de sécurité"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Timer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "default": true,
+      "label": "Afficher le countdown"
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "default": "⏰ Offre limitée dans le temps !",
+      "label": "Label du countdown"
+    },
+    {
+      "type": "text",
+      "id": "countdown_units",
+      "default": "Heures • Minutes • Secondes",
+      "label": "Unités du countdown"
+    },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_footer",
+      "default": true,
+      "label": "Afficher le footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "default": "© 2024 FreshBreeze - Reste frais, reste stylé ☁️",
+      "label": "Texte du footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_link_1_text",
+      "default": "Mentions légales",
+      "label": "Lien footer 1 - Texte"
+    },
+    {
+      "type": "url",
+      "id": "footer_link_1_url",
+      "label": "Lien footer 1 - URL"
+    },
+    {
+      "type": "text",
+      "id": "footer_link_2_text",
+      "default": "CGV",
+      "label": "Lien footer 2 - Texte"
+    },
+    {
+      "type": "url",
+      "id": "footer_link_2_url",
+      "label": "Lien footer 2 - URL"
+    },
+    {
+      "type": "text",
+      "id": "footer_link_3_text",
+      "default": "Contact",
+      "label": "Lien footer 3 - Texte"
+    },
+    {
+      "type": "url",
+      "id": "footer_link_3_url",
+      "label": "Lien footer 3 - URL"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Section"
+    }
+  ]
+}
+{% endschema %}

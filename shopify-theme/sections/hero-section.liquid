@@ -1,0 +1,228 @@
+{{ 'section-hero.css' | asset_url | stylesheet_tag }}
+
+<div class="hero-section color-{{ section.settings.color_scheme }} gradient">
+  <!-- Nuages flottants en arrière-plan -->
+  <div class="background-clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+  </div>
+
+  <div class="page-width">
+    <div class="hero-content">
+      <!-- Badge "Nouveau Produit" -->
+      {%- if section.settings.show_badge -%}
+        <div class="product-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">{{ section.settings.badge_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Accroche principale -->
+      <h1 class="hero-title">
+        <span class="gradient-text">{{ section.settings.title_highlight }}</span>
+        <br>
+        <span class="hero-subtitle">{{ section.settings.subtitle }}</span>
+      </h1>
+
+      <!-- Sous-titre -->
+      <p class="hero-description">
+        {{ section.settings.description }}
+      </p>
+
+      <!-- Image produit principale -->
+      {%- if section.settings.product_image != blank -%}
+        <div class="product-image-container">
+          <div class="product-image-wrapper">
+            {%- assign image_alt = section.settings.product_image.alt | default: section.settings.title_highlight -%}
+            {{ section.settings.product_image | image_url: width: 600 | image_tag:
+              class: 'product-image',
+              alt: image_alt,
+              loading: 'lazy'
+            }}
+            <div class="image-shine"></div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Prix et CTA -->
+      <div class="pricing-cta">
+        <div class="pricing">
+          <div class="price-display">
+            {%- if section.settings.old_price != blank -%}
+              <span class="old-price">{{ section.settings.old_price }}</span>
+            {%- endif -%}
+            <span class="current-price">{{ section.settings.current_price }}</span>
+          </div>
+          {%- if section.settings.shipping_text != blank -%}
+            <div class="shipping-info">{{ section.settings.shipping_text }}</div>
+          {%- endif -%}
+        </div>
+        
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_url | default: '#' }}" class="cta-button">
+            {{ section.settings.cta_text }}
+            <span class="button-arrow">→</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Garanties -->
+      {%- if section.settings.show_guarantees -%}
+        <div class="guarantees">
+          {%- if settings.show_shipping_guarantee -%}
+            <div class="guarantee-item">
+              <span class="check-icon">✓</span>
+              {{ section.settings.guarantee_1 | default: 'Garantie 30 jours' }}
+            </div>
+          {%- endif -%}
+          {%- if settings.show_secure_payment -%}
+            <div class="guarantee-item">
+              <span class="check-icon">✓</span>
+              {{ section.settings.guarantee_2 | default: 'Paiement sécurisé' }}
+            </div>
+          {%- endif -%}
+          {%- if settings.show_money_back -%}
+            <div class="guarantee-item">
+              <span class="check-icon">✓</span>
+              {{ section.settings.guarantee_3 | default: 'Stock limité' }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "default": true,
+      "label": "Afficher le badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "default": "Nouveau produit tendance ✨",
+      "label": "Texte du badge"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "Reste frais",
+      "label": "Titre en surbrillance"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "default": "sans transpirer !",
+      "label": "Sous-titre"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Le ventilateur de cou portable qui révolutionne ton été. Mains libres, silencieux et ultra-stylé ☁️",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Image du produit"
+    },
+    {
+      "type": "text",
+      "id": "old_price",
+      "default": "29€",
+      "label": "Ancien prix"
+    },
+    {
+      "type": "text",
+      "id": "current_price",
+      "default": "19€",
+      "label": "Prix actuel"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "default": "Livraison gratuite 🚚",
+      "label": "Texte livraison"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "default": "Je veux rester frais ☁️",
+      "label": "Texte du bouton"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_guarantees",
+      "default": true,
+      "label": "Afficher les garanties"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1",
+      "default": "Garantie 30 jours",
+      "label": "Garantie 1"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2",
+      "default": "Paiement sécurisé",
+      "label": "Garantie 2"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3",
+      "default": "Stock limité",
+      "label": "Garantie 3"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}

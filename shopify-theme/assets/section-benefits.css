@@ -1,0 +1,102 @@
+/* Benefits Section Styles */
+
+.benefits-section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.cloud-benefits-1 {
+  top: 2.5rem;
+  right: 2.5rem;
+  width: 10rem;
+  height: 5rem;
+}
+
+.cloud-benefits-2 {
+  bottom: 5rem;
+  left: 2.5rem;
+  width: 15rem;
+  height: 7.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: clamp(1.875rem, 6vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: rgb(var(--color-foreground));
+}
+
+.section-description {
+  font-size: 1.125rem;
+  color: rgba(var(--color-foreground), 0.75);
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.benefit-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(var(--color-primary-rgb), 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: scale(1.05);
+}
+
+.benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon {
+  transform: scale(1.1);
+}
+
+.icon-blue {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+}
+
+.icon-purple {
+  background: linear-gradient(to right, var(--color-secondary), var(--color-accent));
+}
+
+.icon-pink {
+  background: linear-gradient(to right, var(--color-accent), var(--color-primary));
+}
+
+.benefit-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: rgb(var(--color-foreground));
+}
+
+.benefit-description {
+  color: rgba(var(--color-foreground), 0.75);
+  line-height: 1.6;
+}

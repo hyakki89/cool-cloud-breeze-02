@@ -1,0 +1,260 @@
+{{ 'section-testimonials.css' | asset_url | stylesheet_tag }}
+
+<div class="testimonials-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ section.settings.title_part1 }} <span class="gradient-text">{{ section.settings.title_highlight }}</span>
+      </h2>
+      <p class="section-description">
+        {{ section.settings.description }}
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'testimonial' -%}
+            <div class="testimonial-card" {{ block.shopify_attributes }}>
+              <div class="testimonial-stars">
+                {%- assign rating = block.settings.rating | default: 5 -%}
+                {%- for i in (1..rating) -%}
+                  ⭐
+                {%- endfor -%}
+              </div>
+              <blockquote class="testimonial-text">
+                "{{ block.settings.text }}"
+              </blockquote>
+              <div class="testimonial-author">
+                {%- if block.settings.author_image != blank -%}
+                  <div class="author-image">
+                    {{ block.settings.author_image | image_url: width: 60 | image_tag:
+                      alt: block.settings.author_name,
+                      loading: 'lazy'
+                    }}
+                  </div>
+                {%- endif -%}
+                <div class="author-info">
+                  <div class="author-name">{{ block.settings.author_name }}</div>
+                  {%- if block.settings.author_title != blank -%}
+                    <div class="author-title">{{ block.settings.author_title }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- if block.settings.show_verified -%}
+                <div class="verified-badge">
+                  <span class="verified-icon">✓</span>
+                  <span class="verified-text">Achat vérifié</span>
+                </div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_stats -%}
+      <div class="testimonials-stats">
+        <div class="stat-item">
+          <div class="stat-number">{{ section.settings.stat_1_number }}</div>
+          <div class="stat-label">{{ section.settings.stat_1_label }}</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ section.settings.stat_2_number }}</div>
+          <div class="stat-label">{{ section.settings.stat_2_label }}</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ section.settings.stat_3_number }}</div>
+          <div class="stat-label">{{ section.settings.stat_3_label }}</div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "text",
+      "id": "title_part1",
+      "default": "Ils adorent leur",
+      "label": "Titre partie 1"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "FreshBreeze",
+      "label": "Titre en surbrillance"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Plus de 2000 clients satisfaits partagent leur expérience",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Statistiques"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "default": true,
+      "label": "Afficher les statistiques"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "default": "2000+",
+      "label": "Statistique 1 - Nombre"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "default": "Clients satisfaits",
+      "label": "Statistique 1 - Label"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "default": "4.8/5",
+      "label": "Statistique 2 - Nombre"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "default": "Note moyenne",
+      "label": "Statistique 2 - Label"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "default": "97%",
+      "label": "Statistique 3 - Nombre"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "default": "Recommandent",
+      "label": "Statistique 3 - Label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Témoignage",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "default": "Incroyable ! Je peux enfin courir en été sans mourir de chaud. Le design est super discret et l'autonomie tient vraiment toute la journée.",
+          "label": "Texte du témoignage"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "default": "Marie L.",
+          "label": "Nom de l'auteur"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "default": "Utilisatrice vérifiée",
+          "label": "Titre de l'auteur"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Photo de l'auteur"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "unit": "★",
+          "label": "Note",
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "show_verified",
+          "default": true,
+          "label": "Afficher le badge vérifié"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Section",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "Incroyable ! Je peux enfin courir en été sans mourir de chaud. Le design est super discret et l'autonomie tient vraiment toute la journée.",
+            "author_name": "Marie L.",
+            "author_title": "Utilisatrice vérifiée",
+            "rating": 5,
+            "show_verified": true
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "Parfait pour mes trajets en métro bondé ! Ultra silencieux et vraiment efficace. Je le recommande à tous mes collègues.",
+            "author_name": "Thomas M.",
+            "author_title": "Client vérifié",
+            "rating": 5,
+            "show_verified": true
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "text": "Design élégant et fonctionnel. Je porte le mien partout, même au bureau. Mes collègues sont jaloux !",
+            "author_name": "Sophie R.",
+            "author_title": "Acheteuse vérifiée",
+            "rating": 4,
+            "show_verified": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,319 @@
+{{ 'section-benefits.css' | asset_url | stylesheet_tag }}
+
+<div class="benefits-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <!-- Nuages décoratifs -->
+  <div class="background-clouds">
+    <div class="cloud cloud-benefits-1"></div>
+    <div class="cloud cloud-benefits-2"></div>
+  </div>
+
+  <div class="page-width">
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ section.settings.title_part1 }} <span class="gradient-text">{{ section.settings.title_highlight }}</span> {{ section.settings.title_part2 }}
+      </h2>
+      <p class="section-description">
+        {{ section.settings.description }}
+      </p>
+    </div>
+
+    <!-- Bénéfices principaux avec icônes -->
+    <div class="benefits-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'benefit' -%}
+            <div class="benefit-card" {{ block.shopify_attributes }}>
+              <div class="benefit-icon icon-{{ block.settings.icon_color }}">
+                {{ block.settings.icon }}
+              </div>
+              <h3 class="benefit-title">{{ block.settings.title }}</h3>
+              <p class="benefit-description">
+                {{ block.settings.description }}
+              </p>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Bénéfices secondaires -->
+    {%- if section.settings.show_additional_benefits -%}
+      <div class="additional-benefits">
+        <div class="additional-benefit">
+          <div class="benefit-emoji">{{ section.settings.additional_benefit_1_emoji }}</div>
+          <div class="benefit-content">
+            <h4 class="additional-benefit-title">{{ section.settings.additional_benefit_1_title }}</h4>
+            <p class="additional-benefit-description">{{ section.settings.additional_benefit_1_description }}</p>
+          </div>
+        </div>
+
+        <div class="additional-benefit">
+          <div class="benefit-emoji">{{ section.settings.additional_benefit_2_emoji }}</div>
+          <div class="benefit-content">
+            <h4 class="additional-benefit-title">{{ section.settings.additional_benefit_2_title }}</h4>
+            <p class="additional-benefit-description">{{ section.settings.additional_benefit_2_description }}</p>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- Section "Parfait pour" -->
+    {%- if section.settings.show_use_cases -%}
+      <div class="perfect-for-section">
+        <h3 class="perfect-for-title">{{ section.settings.use_cases_title }}</h3>
+        <div class="use-cases">
+          {%- if section.settings.use_case_1 != blank -%}
+            <span class="use-case">{{ section.settings.use_case_1 }}</span>
+          {%- endif -%}
+          {%- if section.settings.use_case_2 != blank -%}
+            <span class="use-case">{{ section.settings.use_case_2 }}</span>
+          {%- endif -%}
+          {%- if section.settings.use_case_3 != blank -%}
+            <span class="use-case">{{ section.settings.use_case_3 }}</span>
+          {%- endif -%}
+          {%- if section.settings.use_case_4 != blank -%}
+            <span class="use-case">{{ section.settings.use_case_4 }}</span>
+          {%- endif -%}
+          {%- if section.settings.use_case_5 != blank -%}
+            <span class="use-case">{{ section.settings.use_case_5 }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "text",
+      "id": "title_part1",
+      "default": "Pourquoi tu vas",
+      "label": "Titre partie 1"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "default": "l'adorer",
+      "label": "Titre en surbrillance"
+    },
+    {
+      "type": "text",
+      "id": "title_part2",
+      "default": "?",
+      "label": "Titre partie 2"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "default": "Un concentré de technologie pensé pour ton confort et ton style de vie actif",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Bénéfices additionnels"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_additional_benefits",
+      "default": true,
+      "label": "Afficher les bénéfices additionnels"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_1_emoji",
+      "default": "🎯",
+      "label": "Emoji bénéfice 1"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_1_title",
+      "default": "Design ergonomique",
+      "label": "Titre bénéfice 1"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_1_description",
+      "default": "S'adapte parfaitement à toutes les morphologies",
+      "label": "Description bénéfice 1"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_2_emoji",
+      "default": "⚡",
+      "label": "Emoji bénéfice 2"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_2_title",
+      "default": "3 vitesses ajustables",
+      "label": "Titre bénéfice 2"
+    },
+    {
+      "type": "text",
+      "id": "additional_benefit_2_description",
+      "default": "De la brise légère au vent rafraîchissant",
+      "label": "Description bénéfice 2"
+    },
+    {
+      "type": "header",
+      "content": "Cas d'usage"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_use_cases",
+      "default": true,
+      "label": "Afficher les cas d'usage"
+    },
+    {
+      "type": "text",
+      "id": "use_cases_title",
+      "default": "Parfait pour :",
+      "label": "Titre des cas d'usage"
+    },
+    {
+      "type": "text",
+      "id": "use_case_1",
+      "default": "🏃‍♀️ Sport & Running",
+      "label": "Cas d'usage 1"
+    },
+    {
+      "type": "text",
+      "id": "use_case_2",
+      "default": "🚇 Transports en commun",
+      "label": "Cas d'usage 2"
+    },
+    {
+      "type": "text",
+      "id": "use_case_3",
+      "default": "💼 Bureau climatisé",
+      "label": "Cas d'usage 3"
+    },
+    {
+      "type": "text",
+      "id": "use_case_4",
+      "default": "🎪 Festivals & événements",
+      "label": "Cas d'usage 4"
+    },
+    {
+      "type": "text",
+      "id": "use_case_5",
+      "default": "🏖️ Plage & vacances",
+      "label": "Cas d'usage 5"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Bénéfice",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "default": "🔇",
+          "label": "Icône/Emoji"
+        },
+        {
+          "type": "select",
+          "id": "icon_color",
+          "options": [
+            {
+              "value": "blue",
+              "label": "Bleu"
+            },
+            {
+              "value": "purple",
+              "label": "Violet"
+            },
+            {
+              "value": "pink",
+              "label": "Rose"
+            }
+          ],
+          "default": "blue",
+          "label": "Couleur de l'icône"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Ultra silencieux",
+          "label": "Titre"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "default": "Profite de la fraîcheur sans déranger personne autour de toi",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔇",
+            "icon_color": "blue",
+            "title": "Ultra silencieux",
+            "description": "Profite de la fraîcheur sans déranger personne autour de toi"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔋",
+            "icon_color": "purple",
+            "title": "10h d'autonomie",
+            "description": "Une journée entière de fraîcheur avec une seule charge"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎧",
+            "icon_color": "pink",
+            "title": "Mains libres",
+            "description": "Reste actif pendant que tu te rafraîchis, parfait pour le sport"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,99 @@
+/* CTA Section Styles */
+
+.cta-section {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.dramatic-background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, var(--color-primary), var(--color-secondary), var(--color-accent));
+  opacity: 0.1;
+}
+
+.cta-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite;
+}
+
+.urgency-text {
+  color: #b91c1c;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.cta-title {
+  font-size: clamp(2.5rem, 8vw, 3.75rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: rgb(var(--color-foreground));
+}
+
+.special-offer {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-cta-button {
+  background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+  color: white;
+  border: none;
+  font-size: 1.25rem;
+  padding: 1.5rem 3rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.main-cta-button:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+.countdown-timer {
+  background: linear-gradient(to right, #fef2f2, #fff7ed);
+  border: 1px solid #fecaca;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.timer-display {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #991b1b;
+  font-family: monospace;
+}

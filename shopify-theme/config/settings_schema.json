@@ -1,0 +1,85 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "FreshBreeze",
+    "theme_version": "1.0.0",
+    "theme_author": "FreshBreeze Team",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Couleur principale",
+        "default": "#87ceeb"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Couleur secondaire",
+        "default": "#e6e6fa"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Couleur d'accent",
+        "default": "#ffc0cb"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Couleur du texte",
+        "default": "#374151"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Couleur de fond",
+        "default": "#f8fafc"
+      }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Police des titres",
+        "default": "Inter"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Police du corps",
+        "default": "Inter"
+      }
+    ]
+  },
+  {
+    "name": "Réassurance",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_shipping_guarantee",
+        "label": "Afficher la garantie livraison",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_money_back",
+        "label": "Afficher satisfait ou remboursé",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_secure_payment",
+        "label": "Afficher paiement sécurisé",
+        "default": true
+      }
+    ]
+  }
+]
