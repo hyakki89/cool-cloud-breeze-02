@@ -1,11 +1,8 @@
 
 import { useState } from "react";
-import ProductHeader from "../components/ProductHeader";
 import ProductImage from "../components/ProductImage";
 import ProductInfo from "../components/ProductInfo";
 import ProductTabs from "../components/ProductTabs";
-import RelatedProducts from "../components/RelatedProducts";
-import ProductFooter from "../components/ProductFooter";
 
 const Product = () => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -27,8 +24,6 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-      <ProductHeader cartCount={cartCount} />
-
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4">
         <div className="text-sm text-gray-600">
@@ -57,8 +52,23 @@ const Product = () => {
       </div>
 
       <ProductTabs />
-      <RelatedProducts />
-      <ProductFooter />
+      
+      {/* Footer simple */}
+      <footer className="mt-16 text-center text-gray-500 text-sm py-20 px-4 relative overflow-hidden">
+        {/* Fond dégradé dramatique */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sky-blue via-lavender to-pastel-pink opacity-10"></div>
+        
+        <div className="container mx-auto relative z-10">
+          <div className="border-t border-gray-200 pt-8">
+            <p>&copy; 2024 Zen Ring - Contrôle ton monde ⚡</p>
+            <div className="flex justify-center gap-6 mt-4">
+              <a href="#" className="hover:text-sky-blue transition-colors">Mentions légales</a>
+              <a href="#" className="hover:text-sky-blue transition-colors">CGV</a>
+              <a href="#" className="hover:text-sky-blue transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
