@@ -24,15 +24,6 @@ const Product = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-      {/* Breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
-        <div className="text-sm text-gray-600">
-          <a href="/" className="text-blue-400 hover:underline">Accueil</a> &gt; 
-          <a href="/product" className="text-blue-400 hover:underline ml-1">Produits</a> &gt; 
-          <span className="ml-1">Zen Ring - Bague Connectée</span>
-        </div>
-      </div>
-
       {/* Product Section */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-12">
