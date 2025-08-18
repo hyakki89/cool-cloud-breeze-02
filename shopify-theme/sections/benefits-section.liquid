@@ -1,0 +1,391 @@
+{% comment %}
+  Benefits Section
+{% endcomment %}
+
+<style>
+  .benefits-section-{{ section.id }} {
+    padding: 5rem 1rem;
+    position: relative;
+    background: linear-gradient(to bottom right, 
+      {{ section.settings.background_start | default: '#f8fafc' }},
+      {{ section.settings.background_middle | default: '#f0ffff' }},
+      {{ section.settings.background_end | default: '#e6e6fa' }}
+    );
+  }
+
+  .benefits-clouds {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    filter: blur(40px);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .benefits-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .benefits-title {
+    font-size: clamp(1.875rem, 6vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, 
+      {{ section.settings.accent_color | default: '#87ceeb' }}, 
+      #8b5cf6, 
+      {{ section.settings.secondary_color | default: '#ffc0cb' }}
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .benefits-description {
+    font-size: 1.125rem;
+    color: #6b7280;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .benefit-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(135, 206, 235, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .benefit-card:hover {
+    transform: scale(1.05);
+  }
+
+  .benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+  }
+
+  .icon-blue {
+    background: linear-gradient(to right, {{ section.settings.accent_color | default: '#87ceeb' }}, #e6e6fa);
+  }
+
+  .icon-purple {
+    background: linear-gradient(to right, #e6e6fa, {{ section.settings.secondary_color | default: '#ffc0cb' }});
+  }
+
+  .icon-pink {
+    background: linear-gradient(to right, {{ section.settings.secondary_color | default: '#ffc0cb' }}, {{ section.settings.accent_color | default: '#87ceeb' }});
+  }
+
+  .benefit-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+
+  .benefit-description {
+    color: #6b7280;
+    line-height: 1.6;
+  }
+
+  .use-cases-section {
+    text-align: center;
+  }
+
+  .use-cases-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #1f2937;
+  }
+
+  .use-cases {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .use-case {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #374151;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .use-case:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section class="benefits-section-{{ section.id }}">
+  <!-- Nuages décoratifs -->
+  <div class="benefits-clouds">
+    <div class="cloud" style="top: 2.5rem; right: 2.5rem; width: 10rem; height: 5rem;"></div>
+    <div class="cloud" style="bottom: 5rem; left: 2.5rem; width: 15rem; height: 7.5rem;"></div>
+  </div>
+
+  <div class="page-width">
+    <div class="benefits-header">
+      <h2 class="benefits-title">
+        {{ section.settings.title_start }} <span class="gradient-text">{{ section.settings.title_highlight }}</span> {{ section.settings.title_end }}
+      </h2>
+      <p class="benefits-description">
+        {{ section.settings.description }}
+      </p>
+    </div>
+
+    <!-- Bénéfices principaux -->
+    <div class="benefits-grid">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'benefit' -%}
+            <div class="benefit-card" {{ block.shopify_attributes }}>
+              <div class="benefit-icon icon-{{ block.settings.icon_color }}">
+                {{ block.settings.icon }}
+              </div>
+              <h3 class="benefit-title">{{ block.settings.title }}</h3>
+              <p class="benefit-description">
+                {{ block.settings.description }}
+              </p>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Section "Parfait pour" -->
+    {%- if section.settings.show_use_cases -%}
+      <div class="use-cases-section">
+        <h3 class="use-cases-title">{{ section.settings.use_cases_title }}</h3>
+        <div class="use-cases">
+          {%- assign use_cases = section.settings.use_cases | split: ',' -%}
+          {%- for use_case in use_cases -%}
+            <span class="use-case">{{ use_case | strip }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "title_start",
+      "label": "Début du titre",
+      "default": "Pourquoi tu vas"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Partie en surbrillance",
+      "default": "l'adorer"
+    },
+    {
+      "type": "text",
+      "id": "title_end",
+      "label": "Fin du titre",
+      "default": "?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Un concentré de technologie pensé pour ton confort et ton style de vie actif"
+    },
+    {
+      "type": "header",
+      "content": "Cas d'usage"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_use_cases",
+      "label": "Afficher les cas d'usage",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "use_cases_title",
+      "label": "Titre des cas d'usage",
+      "default": "Parfait pour :"
+    },
+    {
+      "type": "textarea",
+      "id": "use_cases",
+      "label": "Cas d'usage (séparés par des virgules)",
+      "default": "🏃‍♀️ Sport & Running, 🚇 Transports en commun, 💼 Bureau climatisé, 🎪 Festivals & événements, 🏖️ Plage & vacances"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Couleur d'accent",
+      "default": "#87ceeb"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Couleur secondaire",
+      "default": "#ffc0cb"
+    },
+    {
+      "type": "color",
+      "id": "background_start",
+      "label": "Début du dégradé",
+      "default": "#f8fafc"
+    },
+    {
+      "type": "color",
+      "id": "background_middle",
+      "label": "Milieu du dégradé",
+      "default": "#f0ffff"
+    },
+    {
+      "type": "color",
+      "id": "background_end",
+      "label": "Fin du dégradé",
+      "default": "#e6e6fa"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Bénéfice",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icône (emoji)",
+          "default": "🔇"
+        },
+        {
+          "type": "select",
+          "id": "icon_color",
+          "label": "Couleur de l'icône",
+          "options": [
+            {
+              "value": "blue",
+              "label": "Bleu"
+            },
+            {
+              "value": "purple",
+              "label": "Violet"
+            },
+            {
+              "value": "pink",
+              "label": "Rose"
+            }
+          ],
+          "default": "blue"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Ultra silencieux"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Profite de la fraîcheur sans déranger personne autour de toi"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔇",
+            "icon_color": "blue",
+            "title": "Ultra silencieux",
+            "description": "Profite de la fraîcheur sans déranger personne autour de toi"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔋",
+            "icon_color": "purple",
+            "title": "10h d'autonomie",
+            "description": "Une journée entière de fraîcheur avec une seule charge"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🎧",
+            "icon_color": "pink",
+            "title": "Mains libres",
+            "description": "Reste actif pendant que tu te rafraîchis, parfait pour le sport"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

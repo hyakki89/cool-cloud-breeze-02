@@ -1,0 +1,470 @@
+{% comment %}
+  CTA Section
+{% endcomment %}
+
+<style>
+  .cta-section-{{ section.id }} {
+    padding: 5rem 1rem;
+    position: relative;
+    background: linear-gradient(135deg, 
+      {{ section.settings.background_start | default: '#1f2937' }}, 
+      {{ section.settings.background_end | default: '#374151' }}
+    );
+    color: white;
+    overflow: hidden;
+  }
+
+  .cta-background-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .cta-content {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(239, 68, 68, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    margin-bottom: 2rem;
+    color: #fca5a5;
+    font-weight: 500;
+  }
+
+  .urgency-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse-urgent 1.5s infinite;
+  }
+
+  @keyframes pulse-urgent {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.1); }
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .gradient-text {
+    background: linear-gradient(to right, 
+      {{ section.settings.accent_color | default: '#87ceeb' }}, 
+      {{ section.settings.secondary_color | default: '#ffc0cb' }}
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cta-description {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .special-offer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .offer-header {
+    margin-bottom: 2rem;
+  }
+
+  .launch-price {
+    color: {{ section.settings.accent_color | default: '#87ceeb' }};
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .price-comparison {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .old-price-large {
+    font-size: 1.5rem;
+    color: #9ca3af;
+    text-decoration: line-through;
+  }
+
+  .current-price-large {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .discount-badge {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .shipping-info {
+    color: #d1d5db;
+    font-size: 0.875rem;
+  }
+
+  .main-cta-button {
+    background: linear-gradient(to right, 
+      {{ section.settings.accent_color | default: '#87ceeb' }}, 
+      {{ section.settings.secondary_color | default: '#ffc0cb' }}
+    );
+    color: white;
+    border: none;
+    padding: 1.25rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
+
+  .main-cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(135, 206, 235, 0.4);
+  }
+
+  .button-star {
+    animation: sparkle 2s infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(90deg); }
+    75% { transform: scale(0.9) rotate(-90deg); }
+  }
+
+  .security-info {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .countdown-timer {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .timer-label {
+    color: #fbbf24;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .timer-display {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+  }
+
+  .timer-units {
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .special-offer {
+      padding: 1.5rem;
+    }
+    
+    .price-comparison {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .main-cta-button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<section class="cta-section-{{ section.id }}">
+  <!-- Effets de fond -->
+  <div class="cta-background-effects">
+    <div style="position: absolute; top: 10%; right: 10%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(135,206,235,0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,192,203,0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+  </div>
+
+  <div class="page-width">
+    <div class="cta-content">
+      <!-- Badge urgence -->
+      {%- if section.settings.show_urgency_badge -%}
+        <div class="urgency-badge">
+          <span class="urgency-dot"></span>
+          <span class="urgency-text">{{ section.settings.urgency_text }}</span>
+        </div>
+      {%- endif -%}
+
+      <!-- Titre principal -->
+      <h2 class="cta-title">
+        {{ section.settings.title_start }} <span class="gradient-text">{{ section.settings.title_highlight }}</span> {{ section.settings.title_end }}
+      </h2>
+
+      <p class="cta-description">
+        {{ section.settings.description }}
+      </p>
+
+      <!-- Offre spéciale -->
+      <div class="special-offer">
+        <div class="offer-header">
+          <div class="launch-price">{{ section.settings.launch_price_text }}</div>
+          <div class="price-comparison">
+            <span class="old-price-large">{{ section.settings.old_price }}</span>
+            <span class="current-price-large">{{ section.settings.current_price }}</span>
+            <span class="discount-badge">{{ section.settings.discount_text }}</span>
+          </div>
+          <div class="shipping-info">{{ section.settings.shipping_info }}</div>
+        </div>
+
+        <!-- Bouton principal -->
+        <a href="{{ section.settings.cta_url | default: '/products/zen-ring' }}" class="main-cta-button">
+          {{ section.settings.cta_text }}
+          <span class="button-star">🌟</span>
+        </a>
+
+        <div class="security-info">{{ section.settings.security_info }}</div>
+      </div>
+
+      <!-- Countdown timer -->
+      {%- if section.settings.show_countdown -%}
+        <div class="countdown-timer">
+          <div class="timer-label">{{ section.settings.countdown_label }}</div>
+          <div class="timer-display" id="countdown-{{ section.id }}">23:45:12</div>
+          <div class="timer-units">{{ section.settings.countdown_units }}</div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.show_countdown -%}
+  <script>
+    (function() {
+      function updateCountdown() {
+        const timer = document.getElementById('countdown-{{ section.id }}');
+        if (timer) {
+          const now = new Date().getTime();
+          const tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          tomorrow.setHours(0, 0, 0, 0);
+          
+          const distance = tomorrow - now;
+          
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+          timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      }
+      
+      // Mettre à jour le countdown chaque seconde
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "CTA Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Badge d'urgence"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_urgency_badge",
+      "label": "Afficher le badge d'urgence",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texte d'urgence",
+      "default": "🔥 Stock limité - Plus que quelques pièces"
+    },
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "title_start",
+      "label": "Début du titre",
+      "default": "Prêt à dire adieu à la"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Partie en surbrillance",
+      "default": "chaleur"
+    },
+    {
+      "type": "text",
+      "id": "title_end",
+      "label": "Fin du titre",
+      "default": "?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Rejoins la révolution de la fraîcheur portable. Ton été ne sera plus jamais le même ☁️"
+    },
+    {
+      "type": "header",
+      "content": "Offre"
+    },
+    {
+      "type": "text",
+      "id": "launch_price_text",
+      "label": "Texte prix de lancement",
+      "default": "Prix de lancement ✨"
+    },
+    {
+      "type": "text",
+      "id": "old_price",
+      "label": "Ancien prix",
+      "default": "29€"
+    },
+    {
+      "type": "text",
+      "id": "current_price",
+      "label": "Prix actuel",
+      "default": "19€"
+    },
+    {
+      "type": "text",
+      "id": "discount_text",
+      "label": "Texte remise",
+      "default": "-34%"
+    },
+    {
+      "type": "text",
+      "id": "shipping_info",
+      "label": "Info livraison",
+      "default": "+ Livraison gratuite en France 🚚"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texte du bouton",
+      "default": "Je veux rester frais ☁️"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "text",
+      "id": "security_info",
+      "label": "Info sécurité",
+      "default": "Paiement 100% sécurisé • Garantie satisfait ou remboursé 15 jours"
+    },
+    {
+      "type": "header",
+      "content": "Countdown"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Afficher le countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Label du countdown",
+      "default": "⏰ Offre limitée dans le temps !"
+    },
+    {
+      "type": "text",
+      "id": "countdown_units",
+      "label": "Unités du countdown",
+      "default": "Heures • Minutes • Secondes"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Couleur d'accent",
+      "default": "#87ceeb"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Couleur secondaire",
+      "default": "#ffc0cb"
+    },
+    {
+      "type": "color",
+      "id": "background_start",
+      "label": "Début du dégradé de fond",
+      "default": "#1f2937"
+    },
+    {
+      "type": "color",
+      "id": "background_end",
+      "label": "Fin du dégradé de fond",
+      "default": "#374151"
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA Section"
+    }
+  ]
+}
+{% endschema %}

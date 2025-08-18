@@ -1,0 +1,89 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "FreshBreeze",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom Theme",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Couleur d'accent",
+        "default": "#87ceeb"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "label": "Couleur secondaire",
+        "default": "#ffc0cb"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Couleur du texte",
+        "default": "#1f2937"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Couleur de fond",
+        "default": "#f8fafc"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Police des titres",
+        "default": "poppins_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Police du texte",
+        "default": "poppins_n4"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Texte du logo",
+        "default": "FreshBreeze"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Image du logo"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_text",
+        "label": "Texte du footer",
+        "default": "© 2024 FreshBreeze - Reste frais, reste stylé ☁️"
+      },
+      {
+        "type": "textarea",
+        "id": "reassurance_text",
+        "label": "Phrase de réassurance",
+        "default": "Paiement 100% sécurisé • Livraison gratuite • Garantie satisfait ou remboursé"
+      }
+    ]
+  }
+]
