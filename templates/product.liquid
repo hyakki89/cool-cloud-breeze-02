@@ -1,0 +1,264 @@
+{% comment %}
+  Page produit - Template pour les produits individuels
+{% endcomment %}
+
+<div class="container py-8">
+  <div class="grid lg:grid-cols-2 gap-12">
+    <!-- Images produit -->
+    <div class="product-images">
+      {% if product.images.size > 0 %}
+        <div class="main-image mb-6">
+          <img 
+            src="{{ product.featured_image | img_url: '600x600' }}" 
+            alt="{{ product.featured_image.alt | escape }}"
+            class="w-full rounded-3xl shadow-2xl animate-float"
+            id="main-product-image"
+          >
+        </div>
+        
+        {% if product.images.size > 1 %}
+          <div class="thumbnail-images grid grid-cols-4 gap-4">
+            {% for image in product.images limit: 4 %}
+              <img 
+                src="{{ image | img_url: '150x150' }}" 
+                alt="{{ image.alt | escape }}"
+                class="w-full aspect-square object-cover rounded-xl cursor-pointer hover:scale-105 transition-transform"
+                onclick="changeMainImage('{{ image | img_url: '600x600' }}')"
+              >
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="placeholder-image bg-gray-200 rounded-3xl aspect-square flex items-center justify-center">
+          <span class="text-gray-500">{{ 'products.product.media.load_image' | t }}</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Informations produit -->
+    <div class="product-info space-y-6">
+      <!-- Badges -->
+      <div class="flex gap-2 mb-4">
+        <span class="bg-green-500 text-white font-semibold px-3 py-1 rounded-full text-sm">
+          ✨ {{ 'products.product.new' | t: default: 'Nouveau' }}
+        </span>
+        {% if product.compare_at_price > product.price %}
+          <span class="bg-red-500 text-white font-semibold px-3 py-1 rounded-full text-sm animate-pulse">
+            🔥 -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+          </span>
+        {% endif %}
+        <span class="bg-orange-500 text-white font-semibold px-3 py-1 rounded-full text-sm">
+          ⚡ {{ 'products.product.limited_stock' | t: default: 'Stock limité' }}
+        </span>
+      </div>
+
+      <!-- Titre et évaluations -->
+      <div>
+        <h1 class="text-3xl font-bold gradient-text mb-4">{{ product.title }}</h1>
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="flex text-yellow-400">
+            {% for i in (1..5) %}
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <span class="text-gray-600 font-medium">(4.9/5 - 127 avis)</span>
+        </div>
+      </div>
+
+      <!-- Prix et promotions -->
+      <div class="card p-6">
+        <div class="text-center mb-4">
+          <div class="flex items-center justify-center space-x-3 mb-2">
+            {% if product.compare_at_price > product.price %}
+              <span class="text-2xl text-gray-400 line-through">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="text-5xl font-black gradient-text">{{ product.price | money }}</span>
+          </div>
+          {% if product.compare_at_price > product.price %}
+            <div class="bg-green-100 rounded-full px-4 py-2 mb-3">
+              <p class="text-green-700 font-bold text-lg">
+                💰 {{ 'products.product.save' | t: amount: product.compare_at_price | minus: product.price | money }}
+              </p>
+            </div>
+          {% endif %}
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div class="flex items-center text-blue-600 font-semibold">
+            🚚 {{ 'products.product.free_shipping' | t: default: 'Livraison gratuite' }}
+          </div>
+          <div class="flex items-center text-purple-600 font-semibold">
+            ⏱️ {{ 'products.product.fast_shipping' | t: default: 'Expédition 24h' }}
+          </div>
+          <div class="flex items-center text-green-600 font-semibold">
+            🛡️ {{ 'products.product.guarantee' | t: default: 'Garantie 30j' }}
+          </div>
+          <div class="flex items-center text-orange-600 font-semibold">
+            ⚡ {{ 'products.product.secure_payment' | t: default: 'Paiement sécurisé' }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      {% if product.description != blank %}
+        <div class="card p-6">
+          <div class="prose prose-gray max-w-none">
+            {{ product.description }}
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Formulaire d'ajout au panier -->
+      <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+        <!-- Variantes -->
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <div class="mb-6">
+              <label class="block font-semibold mb-2">{{ option.name }} :</label>
+              <div class="flex space-x-3">
+                {% for value in option.values %}
+                  <input 
+                    type="radio" 
+                    id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" 
+                    name="options[{{ option.name | escape }}]" 
+                    value="{{ value | escape }}" 
+                    form="AddToCartForm"
+                    {% if option.selected_value == value %}checked{% endif %}
+                    class="sr-only"
+                  >
+                  <label 
+                    for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                    class="option-button"
+                  >
+                    {{ value }}
+                  </label>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        {% endunless %}
+
+        <!-- Quantité -->
+        <div class="mb-6">
+          <label class="block font-semibold mb-2">{{ 'products.product.quantity.label' | t }} :</label>
+          <div class="flex items-center space-x-3">
+            <button type="button" class="quantity-button" onclick="changeQuantity(-1)">-</button>
+            <input 
+              type="number" 
+              name="quantity" 
+              id="Quantity" 
+              min="1" 
+              value="1" 
+              class="w-12 text-center font-semibold border rounded"
+            >
+            <button type="button" class="quantity-button" onclick="changeQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <!-- Bouton d'ajout au panier -->
+        <div class="space-y-4">
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4 text-center">
+            <div class="flex items-center justify-center text-red-600 font-bold mb-2">
+              ⏰ {{ 'products.product.limited_offer' | t: default: 'Offre limitée dans le temps !' }}
+            </div>
+            <p class="text-red-700 text-sm">{{ 'products.product.hurry_up' | t: default: 'Plus que quelques unités en stock - Commandez maintenant !' }}</p>
+          </div>
+          
+          <button 
+            type="submit" 
+            name="add"
+            class="btn w-full py-4 text-lg"
+            {% unless product.available %}disabled{% endunless %}
+          >
+            <span>
+              {% if product.available %}
+                ⚡ {{ 'products.product.add_to_cart' | t }} - {{ product.price | money }} ⚡
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+          </button>
+          
+          <p class="text-center text-sm text-gray-600">
+            ✅ {{ 'products.product.secure_checkout' | t: default: 'Paiement sécurisé • 📦 Livraison rapide • 🔄 Retour gratuit 30j' }}
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Sections produit -->
+{% section 'product-tabs' %}
+
+<script>
+  function changeMainImage(src) {
+    document.getElementById('main-product-image').src = src;
+  }
+
+  function changeQuantity(change) {
+    const quantityInput = document.getElementById('Quantity');
+    const currentValue = parseInt(quantityInput.value);
+    const newValue = Math.max(1, currentValue + change);
+    quantityInput.value = newValue;
+  }
+
+  // Gestion du formulaire d'ajout au panier
+  document.getElementById('AddToCartForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Afficher une notification de succès
+      alert('Produit ajouté au panier !');
+      // Optionnel: rediriger vers le panier
+      // window.location.href = '/cart';
+    })
+    .catch(error => {
+      console.error('Erreur:', error);
+      alert('Erreur lors de l\'ajout au panier');
+    });
+  });
+</script>
+
+<style>
+  .option-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-gray-300);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .option-button:hover,
+  input:checked + .option-button {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  .quantity-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--border-radius);
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .quantity-button:hover {
+    background-color: var(--color-gray-100);
+  }
+</style>

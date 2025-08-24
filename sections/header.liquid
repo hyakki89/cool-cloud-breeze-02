@@ -1,0 +1,139 @@
+{% comment %}
+  Header - Navigation principale
+{% endcomment %}
+
+<header class="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-20">
+  <div class="container">
+    <div class="flex items-center justify-between py-4">
+      
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="{{ routes.root_url }}" class="flex items-center space-x-2">
+          {% if section.settings.logo %}
+            <img 
+              src="{{ section.settings.logo | img_url: '120x120' }}" 
+              alt="{{ shop.name }}"
+              class="h-10 w-auto"
+            >
+          {% else %}
+            <span class="text-2xl font-bold gradient-text">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Navigation principale (desktop) -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="{{ routes.root_url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          {{ 'general.navigation.home' | t: default: 'Accueil' }}
+        </a>
+        <a href="{{ collections.all.url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          {{ 'general.navigation.products' | t: default: 'Produits' }}
+        </a>
+        {% for link in linklists.main-menu.links %}
+          <a href="{{ link.url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      </nav>
+
+      <!-- Actions (panier, recherche) -->
+      <div class="flex items-center space-x-4">
+        <!-- Recherche -->
+        <button class="text-gray-700 hover:text-blue-600 transition-colors" onclick="toggleSearch()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </button>
+
+        <!-- Panier -->
+        <a href="{{ routes.cart_url }}" class="relative text-gray-700 hover:text-blue-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5H21M9 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM20.5 19.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+          </svg>
+          {% if cart.item_count > 0 %}
+            <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {{ cart.item_count }}
+            </span>
+          {% endif %}
+        </a>
+
+        <!-- Menu mobile -->
+        <button class="md:hidden text-gray-700 hover:text-blue-600 transition-colors" onclick="toggleMobileMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Barre de recherche (masquée par défaut) -->
+    <div id="search-bar" class="hidden border-t border-gray-200 py-4">
+      <form action="{{ routes.search_url }}" method="get" class="flex">
+        <input 
+          type="search" 
+          name="q" 
+          placeholder="{{ 'general.search.placeholder' | t: default: 'Rechercher des produits...' }}"
+          class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:border-blue-500"
+        >
+        <button type="submit" class="btn rounded-l-none">
+          {{ 'general.search.submit' | t: default: 'Rechercher' }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Menu mobile (masqué par défaut) -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 py-4">
+      <nav class="flex flex-col space-y-4">
+        <a href="{{ routes.root_url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          {{ 'general.navigation.home' | t: default: 'Accueil' }}
+        </a>
+        <a href="{{ collections.all.url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+          {{ 'general.navigation.products' | t: default: 'Produits' }}
+        </a>
+        {% for link in linklists.main-menu.links %}
+          <a href="{{ link.url }}" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  function toggleSearch() {
+    const searchBar = document.getElementById('search-bar');
+    searchBar.classList.toggle('hidden');
+    if (!searchBar.classList.contains('hidden')) {
+      searchBar.querySelector('input').focus();
+    }
+  }
+
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  }
+
+  // Fermer les menus en cliquant à l'extérieur
+  document.addEventListener('click', function(event) {
+    const searchBar = document.getElementById('search-bar');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (!event.target.closest('header')) {
+      searchBar.classList.add('hidden');
+      mobileMenu.classList.add('hidden');
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}

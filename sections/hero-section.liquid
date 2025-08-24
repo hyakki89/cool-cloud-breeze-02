@@ -1,0 +1,183 @@
+{% comment %}
+  Section Hero - Landing page principale
+{% endcomment %}
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+  <!-- Nuages flottants en arrière-plan -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-20 left-10 w-32 h-16 bg-white opacity-30 rounded-full blur-xl animate-float"></div>
+    <div class="absolute top-40 right-20 w-48 h-24 opacity-20 rounded-full blur-2xl animate-float" style="background-color: var(--color-secondary); animation-delay: 1s;"></div>
+    <div class="absolute bottom-40 left-1/4 w-40 h-20 opacity-20 rounded-full blur-xl animate-float" style="background-color: var(--color-accent); animation-delay: 2s;"></div>
+  </div>
+
+  <div class="container text-center relative z-10">
+    <div class="max-w-4xl mx-auto">
+      <!-- Badge "Nouveau Produit" -->
+      <div class="inline-flex items-center gap-2 bg-white bg-opacity-40 backdrop-blur-sm px-4 py-2 rounded-full border border-white border-opacity-30 mb-8 animate-fade-in-up">
+        <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--color-primary);"></span>
+        <span class="text-sm font-medium text-gray-700">
+          {{ section.settings.badge_text | default: 'Innovation technologique ⚡' }}
+        </span>
+      </div>
+
+      <!-- Accroche principale -->
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+        <span class="gradient-text">{{ section.settings.hero_title_highlight | default: 'Contrôle tout' }}</span>
+        <br>
+        <span class="text-gray-800">{{ section.settings.hero_title_normal | default: "d'un simple geste !" }}</span>
+      </h1>
+
+      <!-- Sous-titre -->
+      <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s;">
+        {{ section.settings.hero_subtitle | default: 'La bague connectée qui révolutionne ton quotidien digital. Swipe, contrôle et capture sans jamais toucher ton écran 💍' }}
+      </p>
+
+      <!-- Image produit principale -->
+      <div class="relative mb-12 animate-fade-in-up" style="animation-delay: 0.6s;">
+        <div class="relative inline-block">
+          {% if section.settings.hero_image %}
+            <img 
+              src="{{ section.settings.hero_image | img_url: '400x400' }}" 
+              alt="{{ section.settings.hero_image.alt | escape }}"
+              class="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl animate-float"
+              style="box-shadow: 0 25px 50px -12px rgba(135, 206, 235, 0.2);"
+            >
+          {% else %}
+            <img 
+              src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" 
+              alt="Zen Ring - Bague connectée Bluetooth"
+              class="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl animate-float"
+              style="box-shadow: 0 25px 50px -12px rgba(135, 206, 235, 0.2);"
+            >
+          {% endif %}
+          <!-- Effet de brillance -->
+          <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white via-opacity-20 to-transparent rounded-3xl"></div>
+        </div>
+      </div>
+
+      <!-- Prix et CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up" style="animation-delay: 0.8s;">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+            {% if section.settings.original_price %}
+              <span class="text-lg text-gray-500 line-through mr-2">{{ section.settings.original_price }}</span>
+            {% endif %}
+            {{ section.settings.sale_price | default: '19€' }}
+          </div>
+          <div class="text-sm text-gray-600">{{ section.settings.shipping_text | default: 'Livraison gratuite 🚚' }}</div>
+        </div>
+        
+        <a href="{{ section.settings.cta_url | default: '/products/zen-ring' }}" class="btn text-white font-semibold py-4 px-8 rounded-full text-lg border-0 group">
+          {{ section.settings.cta_text | default: 'Je veux ma Zen Ring ⚡' }}
+          <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      </div>
+
+      <!-- Garanties -->
+      <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm text-gray-600 animate-fade-in-up" style="animation-delay: 1s;">
+        <div class="flex items-center gap-2">
+          <span class="text-green-500">✓</span>
+          {{ section.settings.guarantee_1 | default: 'Garantie 30 jours' }}
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-green-500">✓</span>
+          {{ section.settings.guarantee_2 | default: 'Paiement sécurisé' }}
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-green-500">✓</span>
+          {{ section.settings.guarantee_3 | default: 'Stock limité' }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Innovation technologique ⚡"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_highlight",
+      "label": "Hero Title (Highlighted)",
+      "default": "Contrôle tout"
+    },
+    {
+      "type": "text",
+      "id": "hero_title_normal",
+      "label": "Hero Title (Normal)",
+      "default": "d'un simple geste !"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "La bague connectée qui révolutionne ton quotidien digital. Swipe, contrôle et capture sans jamais toucher ton écran 💍"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "text",
+      "id": "original_price",
+      "label": "Original Price",
+      "default": "29€"
+    },
+    {
+      "type": "text",
+      "id": "sale_price",
+      "label": "Sale Price",
+      "default": "19€"
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Shipping Text",
+      "default": "Livraison gratuite 🚚"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "default": "/products/zen-ring"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Je veux ma Zen Ring ⚡"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1",
+      "label": "Guarantee 1",
+      "default": "Garantie 30 jours"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2",
+      "label": "Guarantee 2",
+      "default": "Paiement sécurisé"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3",
+      "label": "Guarantee 3",
+      "default": "Stock limité"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,266 @@
+{% comment %}
+  Section Bénéfices - Pourquoi choisir le produit
+{% endcomment %}
+
+<section class="py-20 px-4 relative">
+  <!-- Nuages décoratifs -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-10 right-10 w-40 h-20 bg-white opacity-20 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-20 left-10 w-60 h-30 opacity-10 rounded-full blur-3xl" style="background-color: var(--color-secondary);"></div>
+  </div>
+
+  <div class="container relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        {{ section.settings.section_title_normal | default: 'Pourquoi tu vas' }} <span class="gradient-text">{{ section.settings.section_title_highlight | default: "l'adorer" }}</span> ?
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {{ section.settings.section_subtitle | default: 'Une bague connectée révolutionnaire qui transforme ton quotidien numérique' }}
+      </p>
+    </div>
+
+    <!-- Bénéfices principaux avec icônes -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+      {% for block in section.blocks %}
+        {% if block.type == 'benefit' %}
+          <div class="group relative">
+            <div class="card rounded-3xl p-8 h-full hover:scale-105 transition-all duration-300 text-center">
+              <!-- Icône avec dégradé -->
+              <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl text-white mb-6 group-hover:scale-110 transition-transform duration-300" style="background: linear-gradient(135deg, {{ block.settings.gradient_from | default: '#87CEEB' }}, {{ block.settings.gradient_to | default: '#E6E6FA' }});">
+                <span class="text-2xl">{{ block.settings.icon | default: '📱' }}</span>
+              </div>
+              
+              <h3 class="text-xl font-semibold mb-4 text-gray-800">
+                {{ block.settings.title }}
+              </h3>
+              
+              <p class="text-gray-600 leading-relaxed">
+                {{ block.settings.description }}
+              </p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Bénéfices secondaires -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {% for block in section.blocks %}
+        {% if block.type == 'secondary_benefit' %}
+          <div class="card rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+            <div class="flex items-start gap-4">
+              <div class="text-3xl">{{ block.settings.emoji }}</div>
+              <div>
+                <h4 class="font-semibold text-gray-800 mb-2">{{ block.settings.title }}</h4>
+                <p class="text-gray-600">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Section "Parfait pour" -->
+    <div class="mt-20 text-center">
+      <h3 class="text-2xl font-bold mb-8 text-gray-800">{{ section.settings.perfect_for_title | default: 'Parfait pour :' }}</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        {% for block in section.blocks %}
+          {% if block.type == 'use_case' %}
+            <span class="bg-white bg-opacity-60 backdrop-blur-sm px-4 py-2 rounded-full border border-white border-opacity-30 text-gray-700 hover:scale-105 transition-transform cursor-pointer">
+              {{ block.settings.text }}
+            </span>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title_normal",
+      "label": "Section Title (Normal)",
+      "default": "Pourquoi tu vas"
+    },
+    {
+      "type": "text",
+      "id": "section_title_highlight",
+      "label": "Section Title (Highlighted)",
+      "default": "l'adorer"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Une bague connectée révolutionnaire qui transforme ton quotidien numérique"
+    },
+    {
+      "type": "text",
+      "id": "perfect_for_title",
+      "label": "Perfect For Title",
+      "default": "Parfait pour :"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Main Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (Emoji)",
+          "default": "📱"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Contrôle total"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Swipe TikTok, Instagram, YouTube sans toucher ton écran"
+        },
+        {
+          "type": "color",
+          "id": "gradient_from",
+          "label": "Gradient From Color",
+          "default": "#87CEEB"
+        },
+        {
+          "type": "color",
+          "id": "gradient_to",
+          "label": "Gradient To Color",
+          "default": "#E6E6FA"
+        }
+      ]
+    },
+    {
+      "type": "secondary_benefit",
+      "name": "Secondary Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "💍"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Design minimaliste"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Discret et moderne, personne ne remarquera que tu la portes"
+        }
+      ]
+    },
+    {
+      "type": "use_case",
+      "name": "Use Case",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Use Case Text",
+          "default": "📱 Réseaux sociaux"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "📱",
+            "title": "Contrôle total",
+            "description": "Swipe TikTok, Instagram, YouTube sans toucher ton écran",
+            "gradient_from": "#87CEEB",
+            "gradient_to": "#E6E6FA"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "🔋",
+            "title": "72h d'autonomie",
+            "description": "3 jours d'utilisation avec le boîtier de recharge inclus",
+            "gradient_from": "#E6E6FA",
+            "gradient_to": "#FFB6C1"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "📸",
+            "title": "Selfies parfaits",
+            "description": "Déclenche tes photos et vidéos à distance, fini les selfies ratés",
+            "gradient_from": "#FFB6C1",
+            "gradient_to": "#87CEEB"
+          }
+        },
+        {
+          "type": "secondary_benefit",
+          "settings": {
+            "emoji": "💍",
+            "title": "Design minimaliste",
+            "description": "Discret et moderne, personne ne remarquera que tu la portes"
+          }
+        },
+        {
+          "type": "secondary_benefit",
+          "settings": {
+            "emoji": "📱",
+            "title": "Compatible iOS & Android",
+            "description": "Fonctionne avec tous les smartphones modernes"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "text": "📱 Réseaux sociaux"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "text": "🎶 Contrôle musique"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "text": "📸 Selfies & photos"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "text": "📖 Lecture e-books"
+          }
+        },
+        {
+          "type": "use_case",
+          "settings": {
+            "text": "🎮 Gaming mobile"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
