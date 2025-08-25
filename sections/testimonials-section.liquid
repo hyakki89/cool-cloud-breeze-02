@@ -2,11 +2,11 @@
   Section Témoignages clients
 {% endcomment %}
 
-<section class="py-20 px-4 relative overflow-hidden">
+<section class="py-20 px-4 relative">
   <!-- Fond décoratif -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl opacity-20"></div>
-    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-br from-pink-200 to-blue-200 rounded-full blur-3xl opacity-20"></div>
+    <div class="absolute top-1/4 left-10 w-32 h-32 bg-gradient-to-br from-purple-200 to-pink-200 rounded-full blur-2xl opacity-50"></div>
+    <div class="absolute bottom-1/4 right-10 w-40 h-40 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-2xl opacity-50"></div>
   </div>
 
   <div class="container relative z-10">
@@ -20,55 +20,60 @@
       </p>
     </div>
 
-    <!-- Grille de témoignages -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <!-- Témoignages grid -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
       {% for block in section.blocks %}
         {% if block.type == 'testimonial' %}
-          <div class="card p-6 hover:scale-105 transition-all duration-300">
+          <div class="card rounded-3xl p-8 text-center hover:scale-105 transition-all duration-300">
+            <!-- Avatar -->
+            {% if block.settings.avatar %}
+              <img 
+                src="{{ block.settings.avatar | img_url: '80x80' }}" 
+                alt="{{ block.settings.name }}"
+                class="w-20 h-20 rounded-full mx-auto mb-6 object-cover"
+              >
+            {% else %}
+              <div class="w-20 h-20 rounded-full mx-auto mb-6 bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-white text-2xl font-bold">
+                {{ block.settings.name | slice: 0 }}
+              </div>
+            {% endif %}
+
+            <!-- Témoignage -->
+            <blockquote class="text-gray-700 mb-6 italic leading-relaxed">
+              "{{ block.settings.testimonial }}"
+            </blockquote>
+
             <!-- Étoiles -->
-            <div class="flex items-center mb-4">
-              {% for i in (1..5) %}
-                <span class="text-yellow-400 text-lg">⭐</span>
+            <div class="flex justify-center mb-4">
+              {% assign stars = block.settings.rating | default: 5 %}
+              {% for i in (1..stars) %}
+                <span class="text-yellow-400 text-xl">⭐</span>
               {% endfor %}
             </div>
-            
-            <!-- Témoignage -->
-            <p class="text-gray-600 mb-6 leading-relaxed">
-              "{{ block.settings.testimonial_text }}"
-            </p>
-            
-            <!-- Auteur -->
-            <div class="flex items-center">
-              {% if block.settings.avatar %}
-                <img 
-                  src="{{ block.settings.avatar | img_url: '48x48' }}" 
-                  alt="{{ block.settings.name }}"
-                  class="w-12 h-12 rounded-full mr-3"
-                >
-              {% else %}
-                <div class="w-12 h-12 rounded-full mr-3 flex items-center justify-center text-white text-lg font-semibold" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent));">
-                  {{ block.settings.name | slice: 0 }}
-                </div>
+
+            <!-- Nom et détails -->
+            <div class="text-gray-600">
+              <div class="font-semibold text-gray-800">{{ block.settings.name }}</div>
+              {% if block.settings.details %}
+                <div class="text-sm">{{ block.settings.details }}</div>
               {% endif %}
-              <div>
-                <h4 class="font-semibold text-gray-800">{{ block.settings.name }}</h4>
-                <p class="text-sm text-gray-500">{{ block.settings.location }}</p>
-              </div>
             </div>
           </div>
         {% endif %}
       {% endfor %}
     </div>
 
-    <!-- Statistiques de confiance -->
-    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
       {% for block in section.blocks %}
-        {% if block.type == 'statistic' %}
+        {% if block.type == 'stat' %}
           <div class="text-center">
-            <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">
+            <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
               {{ block.settings.number }}
             </div>
-            <p class="text-gray-600">{{ block.settings.label }}</p>
+            <div class="text-gray-600">
+              {{ block.settings.label }}
+            </div>
           </div>
         {% endif %}
       {% endfor %}
@@ -105,44 +110,52 @@
       "name": "Testimonial",
       "settings": [
         {
-          "type": "textarea",
-          "id": "testimonial_text",
-          "label": "Testimonial Text",
-          "default": "La Zen Ring a complètement changé ma façon d'utiliser mon téléphone !"
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar Image"
         },
         {
           "type": "text",
           "id": "name",
           "label": "Customer Name",
-          "default": "Marie L."
+          "default": "Marie D."
         },
         {
           "type": "text",
-          "id": "location",
-          "label": "Customer Location",
+          "id": "details",
+          "label": "Customer Details",
           "default": "Paris, France"
         },
         {
-          "type": "image_picker",
-          "id": "avatar",
-          "label": "Customer Avatar"
+          "type": "textarea",
+          "id": "testimonial",
+          "label": "Testimonial Text",
+          "default": "Cette bague a changé ma façon d'utiliser mon téléphone. Je peux scroller sur TikTok sans me fatiguer les mains !"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating (Stars)",
+          "min": 1,
+          "max": 5,
+          "default": 5
         }
       ]
     },
     {
-      "type": "statistic",
-      "name": "Trust Statistic",
+      "type": "stat",
+      "name": "Statistic",
       "settings": [
         {
           "type": "text",
           "id": "number",
-          "label": "Number/Value",
+          "label": "Number",
           "default": "2000+"
         },
         {
           "type": "text",
           "id": "label",
-          "label": "Statistic Label",
+          "label": "Label",
           "default": "Clients satisfaits"
         }
       ]
@@ -162,7 +175,16 @@
           "type": "testimonial"
         },
         {
-          "type": "statistic"
+          "type": "stat"
+        },
+        {
+          "type": "stat"
+        },
+        {
+          "type": "stat"
+        },
+        {
+          "type": "stat"
         }
       ]
     }

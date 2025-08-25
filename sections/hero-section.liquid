@@ -1,92 +1,90 @@
 {% comment %}
-  Section Hero - Landing page principale
+  Section Hero - Page d'accueil principale
 {% endcomment %}
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-  <!-- Nuages flottants en arrière-plan -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-20 left-10 w-32 h-16 bg-white opacity-30 rounded-full blur-xl animate-float"></div>
-    <div class="absolute top-40 right-20 w-48 h-24 opacity-20 rounded-full blur-2xl animate-float" style="background-color: var(--color-secondary); animation-delay: 1s;"></div>
-    <div class="absolute bottom-40 left-1/4 w-40 h-20 opacity-20 rounded-full blur-xl animate-float" style="background-color: var(--color-accent); animation-delay: 2s;"></div>
+<section class="py-20 px-4 relative min-h-screen flex items-center overflow-hidden">
+  <!-- Fond dégradé animé -->
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"></div>
+    <div class="absolute top-0 left-0 w-full h-full opacity-30">
+      <div class="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl animate-float"></div>
+      <div class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-pink-400 to-blue-400 rounded-full blur-3xl animate-float" style="animation-delay: 1s;"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-purple-300 to-pink-300 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+    </div>
   </div>
 
-  <div class="container text-center relative z-10">
-    <div class="max-w-4xl mx-auto">
-      <!-- Badge "Nouveau Produit" -->
-      <div class="inline-flex items-center gap-2 bg-white bg-opacity-40 backdrop-blur-sm px-4 py-2 rounded-full border border-white border-opacity-30 mb-8 animate-fade-in-up">
-        <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--color-primary);"></span>
+  <div class="container relative z-10">
+    <div class="text-center">
+      <!-- Badge Innovation -->
+      <div class="inline-flex items-center gap-2 bg-white bg-opacity-60 backdrop-blur-sm px-4 py-2 rounded-full border border-white border-opacity-30 mb-8 animate-fade-in-up">
+        <span class="text-blue-500">💎</span>
         <span class="text-sm font-medium text-gray-700">
-          {{ section.settings.badge_text | default: 'Innovation technologique ⚡' }}
+          {{ section.settings.innovation_badge | default: 'Innovation technologique ⚡' }}
         </span>
       </div>
 
-      <!-- Accroche principale -->
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+      <!-- Titre principal -->
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in-up" style="animation-delay: 0.2s;">
         <span class="gradient-text">{{ section.settings.hero_title_highlight | default: 'Contrôle tout' }}</span>
         <br>
         <span class="text-gray-800">{{ section.settings.hero_title_normal | default: "d'un simple geste !" }}</span>
       </h1>
 
       <!-- Sous-titre -->
-      <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s;">
+      <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s;">
         {{ section.settings.hero_subtitle | default: 'La bague connectée qui révolutionne ton quotidien digital. Swipe, contrôle et capture sans jamais toucher ton écran 💍' }}
       </p>
 
-      <!-- Image produit principale -->
-      <div class="relative mb-12 animate-fade-in-up" style="animation-delay: 0.6s;">
-        <div class="relative inline-block">
-          {% if section.settings.hero_image %}
-            <img 
-              src="{{ section.settings.hero_image | img_url: '400x400' }}" 
-              alt="{{ section.settings.hero_image.alt | escape }}"
-              class="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl animate-float"
-              style="box-shadow: 0 25px 50px -12px rgba(135, 206, 235, 0.2);"
-            >
-          {% else %}
-            <img 
-              src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=400&q=80" 
-              alt="Zen Ring - Bague connectée Bluetooth"
-              class="w-64 md:w-80 lg:w-96 mx-auto rounded-3xl shadow-2xl animate-float"
-              style="box-shadow: 0 25px 50px -12px rgba(135, 206, 235, 0.2);"
-            >
-          {% endif %}
-          <!-- Effet de brillance -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white via-opacity-20 to-transparent rounded-3xl"></div>
+      <!-- Image produit -->
+      {% if section.settings.product_image %}
+        <div class="mb-8 animate-fade-in-up" style="animation-delay: 0.6s;">
+          <img 
+            src="{{ section.settings.product_image | img_url: '600x400' }}" 
+            alt="{{ section.settings.product_image.alt | default: 'Zen Ring - Bague connectée' }}"
+            class="mx-auto rounded-3xl shadow-2xl max-w-md w-full animate-float"
+          >
         </div>
-      </div>
+      {% endif %}
 
       <!-- Prix et CTA -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up" style="animation-delay: 0.8s;">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8 animate-fade-in-up" style="animation-delay: 0.8s;">
+        <!-- Prix -->
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
-            {% if section.settings.original_price %}
-              <span class="text-lg text-gray-500 line-through mr-2">{{ section.settings.original_price }}</span>
-            {% endif %}
+          {% if section.settings.original_price %}
+            <div class="text-lg text-gray-500 line-through mb-1">{{ section.settings.original_price }}</div>
+          {% endif %}
+          <div class="text-4xl md:text-5xl font-bold text-gray-800">
             {{ section.settings.sale_price | default: '19€' }}
           </div>
-          <div class="text-sm text-gray-600">{{ section.settings.shipping_text | default: 'Livraison gratuite 🚚' }}</div>
+          <div class="text-sm text-green-600 font-medium">
+            {{ section.settings.shipping_note | default: 'Livraison gratuite 🚚' }}
+          </div>
         </div>
-        
-        <a href="{{ section.settings.cta_url | default: '/products/zen-ring' }}" class="btn text-white font-semibold py-4 px-8 rounded-full text-lg border-0 group">
-          {{ section.settings.cta_text | default: 'Je veux ma Zen Ring ⚡' }}
-          <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-        </a>
+
+        <!-- Flèche -->
+        <div class="hidden sm:block">
+          <span class="text-3xl">→</span>
+        </div>
+
+        <!-- CTA Button -->
+        <div>
+          <a href="{{ section.settings.cta_url | default: '/products/zen-ring' }}" class="btn text-white font-bold py-4 px-8 rounded-full text-lg border-0 inline-flex items-center group shadow-2xl">
+            {{ section.settings.cta_text | default: 'Commander maintenant ⚡' }}
+            <span class="ml-3 group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+        </div>
       </div>
 
       <!-- Garanties -->
-      <div class="flex flex-wrap justify-center gap-6 mt-8 text-sm text-gray-600 animate-fade-in-up" style="animation-delay: 1s;">
-        <div class="flex items-center gap-2">
-          <span class="text-green-500">✓</span>
-          {{ section.settings.guarantee_1 | default: 'Garantie 30 jours' }}
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-green-500">✓</span>
-          {{ section.settings.guarantee_2 | default: 'Paiement sécurisé' }}
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-green-500">✓</span>
-          {{ section.settings.guarantee_3 | default: 'Stock limité' }}
-        </div>
+      <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-600 animate-fade-in-up" style="animation-delay: 1s;">
+        {% for block in section.blocks %}
+          {% if block.type == 'guarantee' %}
+            <div class="flex items-center gap-2">
+              <span class="text-green-500">{{ block.settings.icon | default: '✓' }}</span>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -98,8 +96,8 @@
   "settings": [
     {
       "type": "text",
-      "id": "badge_text",
-      "label": "Badge Text",
+      "id": "innovation_badge",
+      "label": "Innovation Badge",
       "default": "Innovation technologique ⚡"
     },
     {
@@ -122,8 +120,8 @@
     },
     {
       "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Image"
+      "id": "product_image",
+      "label": "Product Image"
     },
     {
       "type": "text",
@@ -139,8 +137,8 @@
     },
     {
       "type": "text",
-      "id": "shipping_text",
-      "label": "Shipping Text",
+      "id": "shipping_note",
+      "label": "Shipping Note",
       "default": "Livraison gratuite 🚚"
     },
     {
@@ -152,31 +150,44 @@
     {
       "type": "text",
       "id": "cta_text",
-      "label": "CTA Text",
-      "default": "Je veux ma Zen Ring ⚡"
-    },
+      "label": "CTA Button Text",
+      "default": "Commander maintenant ⚡"
+    }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "guarantee_1",
-      "label": "Guarantee 1",
-      "default": "Garantie 30 jours"
-    },
-    {
-      "type": "text",
-      "id": "guarantee_2",
-      "label": "Guarantee 2",
-      "default": "Paiement sécurisé"
-    },
-    {
-      "type": "text",
-      "id": "guarantee_3",
-      "label": "Guarantee 3",
-      "default": "Stock limité"
+      "type": "guarantee",
+      "name": "Guarantee",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Guarantee Text",
+          "default": "Livraison gratuite"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Hero Section"
+      "name": "Hero Section",
+      "blocks": [
+        {
+          "type": "guarantee"
+        },
+        {
+          "type": "guarantee"
+        },
+        {
+          "type": "guarantee"
+        }
+      ]
     }
   ]
 }
