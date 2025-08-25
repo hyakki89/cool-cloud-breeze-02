@@ -1,0 +1,164 @@
+{% comment %}
+  Section Product Tabs - Onglets produit
+{% endcomment %}
+
+<section class="py-12 px-4">
+  <div class="container mx-auto">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Navigation des onglets -->
+      <div class="flex border-b border-gray-200 mb-8">
+        {% for block in section.blocks %}
+          {% if block.type == 'tab' %}
+            <button 
+              class="py-4 px-6 text-gray-600 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 transition-colors tab-button"
+              onclick="showTab('{{ block.id }}')"
+              {% if forloop.first %}data-active="true"{% endif %}
+            >
+              {{ block.settings.title }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Contenu des onglets -->
+      <div class="tab-content">
+        {% for block in section.blocks %}
+          {% if block.type == 'tab' %}
+            <div 
+              id="tab-{{ block.id }}" 
+              class="tab-pane"
+              {% unless forloop.first %}style="display: none;"{% endunless %}
+            >
+              <div class="prose max-w-none">
+                {% if block.settings.content %}
+                  {{ block.settings.content }}
+                {% endif %}
+                
+                {% if block.settings.features %}
+                  <ul class="grid md:grid-cols-2 gap-4 mt-6 list-none">
+                    {% assign features = block.settings.features | split: ',' %}
+                    {% for feature in features %}
+                      <li class="flex items-center gap-3">
+                        <span class="text-green-500">✓</span>
+                        <span>{{ feature | strip }}</span>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function showTab(tabId) {
+    // Masquer tous les onglets
+    document.querySelectorAll('.tab-pane').forEach(pane => {
+      pane.style.display = 'none';
+    });
+    
+    // Désactiver tous les boutons
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.classList.remove('text-blue-600', 'border-blue-600');
+      button.classList.add('text-gray-600', 'border-transparent');
+      button.removeAttribute('data-active');
+    });
+    
+    // Afficher l'onglet sélectionné
+    const targetTab = document.getElementById('tab-' + tabId);
+    if (targetTab) {
+      targetTab.style.display = 'block';
+    }
+    
+    // Activer le bouton sélectionné
+    event.target.classList.remove('text-gray-600', 'border-transparent');
+    event.target.classList.add('text-blue-600', 'border-blue-600');
+    event.target.setAttribute('data-active', 'true');
+  }
+</script>
+
+<style>
+  .tab-button[data-active="true"] {
+    color: #2563eb !important;
+    border-bottom-color: #2563eb !important;
+  }
+  
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+  
+  .prose p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: #6b7280;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Tabs",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre de l'onglet",
+          "default": "Description"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Contenu de l'onglet",
+          "default": "<p>Contenu de votre onglet ici.</p>"
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Fonctionnalités (séparées par des virgules)",
+          "info": "Ex: Bluetooth 5.0, Batterie 8h, Étanche IPX4"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tabs",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Description",
+            "content": "<p>Description détaillée du produit.</p>"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Caractéristiques",
+            "features": "Bluetooth 5.0, Batterie longue durée, Design ergonomique"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Livraison",
+            "content": "<p>Livraison gratuite en France métropolitaine sous 2-3 jours ouvrés.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
