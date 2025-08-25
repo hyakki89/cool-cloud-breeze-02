@@ -1,0 +1,91 @@
+{% comment %}
+  Page de recherche
+{% endcomment %}
+
+<div class="py-20 px-4">
+  <div class="container">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+        Résultats de recherche
+        {% if search.terms %}
+          pour "<span class="gradient-text">{{ search.terms }}</span>"
+        {% endif %}
+      </h1>
+      
+      <!-- Formulaire de recherche -->
+      <form action="{{ routes.search_url }}" method="get" class="mb-12">
+        <div class="flex max-w-2xl mx-auto">
+          <input 
+            type="search" 
+            name="q" 
+            value="{{ search.terms | escape }}"
+            placeholder="Rechercher des produits..."
+            class="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:outline-none focus:border-blue-500"
+          >
+          <button type="submit" class="btn rounded-l-none">
+            Rechercher
+          </button>
+        </div>
+      </form>
+      
+      {% if search.performed %}
+        {% if search.results_count > 0 %}
+          <p class="text-center text-gray-600 mb-8">
+            {{ search.results_count }} 
+            {% if search.results_count == 1 %}
+              résultat trouvé
+            {% else %}
+              résultats trouvés
+            {% endif %}
+          </p>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in search.results %}
+              <div class="card rounded-2xl overflow-hidden">
+                {% if item.featured_image %}
+                  <img 
+                    src="{{ item.featured_image | img_url: '300x300' }}" 
+                    alt="{{ item.title | escape }}"
+                    class="w-full h-48 object-cover"
+                  >
+                {% endif %}
+                
+                <div class="p-6">
+                  <h3 class="font-semibold text-lg mb-2">
+                    <a href="{{ item.url }}" class="text-gray-800 hover:text-blue-600">
+                      {{ item.title }}
+                    </a>
+                  </h3>
+                  
+                  {% if item.price %}
+                    <p class="text-xl font-bold gradient-text mb-4">
+                      {{ item.price | money }}
+                    </p>
+                  {% endif %}
+                  
+                  {% if item.excerpt %}
+                    <p class="text-gray-600 text-sm">
+                      {{ item.excerpt | strip_html | truncate: 120 }}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="text-center">
+            <p class="text-xl text-gray-600 mb-8">
+              Aucun résultat trouvé pour "{{ search.terms }}"
+            </p>
+            <p class="text-gray-500 mb-8">
+              Essayez avec d'autres mots-clés ou parcourez nos produits.
+            </p>
+            <a href="{{ collections.all.url }}" class="btn">
+              Voir tous les produits
+            </a>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
