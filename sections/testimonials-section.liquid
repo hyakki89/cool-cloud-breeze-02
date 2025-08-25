@@ -1,32 +1,76 @@
 {% comment %}
-  Section Témoignages
+  Section Témoignages clients
 {% endcomment %}
 
 <section class="py-20 px-4 relative overflow-hidden">
+  <!-- Fond décoratif -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full blur-3xl opacity-20"></div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-br from-pink-200 to-blue-200 rounded-full blur-3xl opacity-20"></div>
+  </div>
+
   <div class="container relative z-10">
+    <!-- En-tête -->
     <div class="text-center mb-16">
       <h2 class="text-3xl md:text-5xl font-bold mb-6">
-        {{ section.settings.title | default: 'Ce que disent nos clients' }}
+        {{ section.settings.section_title_normal | default: 'Ce que disent nos' }} <span class="gradient-text">{{ section.settings.section_title_highlight | default: 'clients' }}</span>
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        {{ section.settings.subtitle | default: 'Plus de 2000 clients satisfaits nous font confiance' }}
+        {{ section.settings.section_subtitle | default: 'Plus de 2000 clients satisfaits nous font confiance' }}
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <!-- Grille de témoignages -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {% for block in section.blocks %}
-        <div class="card p-6 text-center">
-          <div class="flex justify-center mb-4">
-            {% for i in (1..5) %}
-              <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            {% endfor %}
+        {% if block.type == 'testimonial' %}
+          <div class="card p-6 hover:scale-105 transition-all duration-300">
+            <!-- Étoiles -->
+            <div class="flex items-center mb-4">
+              {% for i in (1..5) %}
+                <span class="text-yellow-400 text-lg">⭐</span>
+              {% endfor %}
+            </div>
+            
+            <!-- Témoignage -->
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              "{{ block.settings.testimonial_text }}"
+            </p>
+            
+            <!-- Auteur -->
+            <div class="flex items-center">
+              {% if block.settings.avatar %}
+                <img 
+                  src="{{ block.settings.avatar | img_url: '48x48' }}" 
+                  alt="{{ block.settings.name }}"
+                  class="w-12 h-12 rounded-full mr-3"
+                >
+              {% else %}
+                <div class="w-12 h-12 rounded-full mr-3 flex items-center justify-center text-white text-lg font-semibold" style="background: linear-gradient(135deg, var(--color-primary), var(--color-accent));">
+                  {{ block.settings.name | slice: 0 }}
+                </div>
+              {% endif %}
+              <div>
+                <h4 class="font-semibold text-gray-800">{{ block.settings.name }}</h4>
+                <p class="text-sm text-gray-500">{{ block.settings.location }}</p>
+              </div>
+            </div>
           </div>
-          <p class="text-gray-600 mb-6 italic">"{{ block.settings.content }}"</p>
-          <div class="font-semibold">{{ block.settings.author }}</div>
-          <div class="text-sm text-gray-500">{{ block.settings.location }}</div>
-        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Statistiques de confiance -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+      {% for block in section.blocks %}
+        {% if block.type == 'statistic' %}
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">
+              {{ block.settings.number }}
+            </div>
+            <p class="text-gray-600">{{ block.settings.label }}</p>
+          </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -35,17 +79,24 @@
 {% schema %}
 {
   "name": "Testimonials Section",
+  "tag": "section",
   "settings": [
     {
       "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Ce que disent nos clients"
+      "id": "section_title_normal",
+      "label": "Section Title (Normal)",
+      "default": "Ce que disent nos"
+    },
+    {
+      "type": "text",
+      "id": "section_title_highlight",
+      "label": "Section Title (Highlighted)",
+      "default": "clients"
     },
     {
       "type": "textarea",
-      "id": "subtitle",
-      "label": "Subtitle",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
       "default": "Plus de 2000 clients satisfaits nous font confiance"
     }
   ],
@@ -56,18 +107,44 @@
       "settings": [
         {
           "type": "textarea",
-          "id": "content",
-          "label": "Testimonial Content"
+          "id": "testimonial_text",
+          "label": "Testimonial Text",
+          "default": "La Zen Ring a complètement changé ma façon d'utiliser mon téléphone !"
         },
         {
           "type": "text",
-          "id": "author",
-          "label": "Author Name"
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Marie L."
         },
         {
           "type": "text",
           "id": "location",
-          "label": "Location"
+          "label": "Customer Location",
+          "default": "Paris, France"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer Avatar"
+        }
+      ]
+    },
+    {
+      "type": "statistic",
+      "name": "Trust Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number/Value",
+          "default": "2000+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Statistic Label",
+          "default": "Clients satisfaits"
         }
       ]
     }
@@ -77,28 +154,16 @@
       "name": "Testimonials Section",
       "blocks": [
         {
-          "type": "testimonial",
-          "settings": {
-            "content": "Cette bague a changé ma façon d'utiliser mon téléphone ! Super pratique pour TikTok",
-            "author": "Marie L.",
-            "location": "Paris"
-          }
+          "type": "testimonial"
         },
         {
-          "type": "testimonial",
-          "settings": {
-            "content": "Design élégant et très fonctionnel. Je la recommande vivement !",
-            "author": "Lucas M.",
-            "location": "Lyon"
-          }
+          "type": "testimonial"
         },
         {
-          "type": "testimonial",
-          "settings": {
-            "content": "Parfait pour mes selfies et stories Instagram. Très satisfaite !",
-            "author": "Sophie D.",
-            "location": "Marseille"
-          }
+          "type": "testimonial"
+        },
+        {
+          "type": "statistic"
         }
       ]
     }
