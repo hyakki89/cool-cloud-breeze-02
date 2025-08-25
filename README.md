@@ -1,73 +1,48 @@
-# Welcome to your Lovable project
+# Zen Ring - Thème Shopify
 
-## Project info
+Un thème Shopify moderne et élégant conçu pour les produits de bagues connectées.
 
-**URL**: https://lovable.dev/projects/bf53cea2-c113-47f5-88da-67c78d282cb3
+## Installation
 
-## How can I edit this code?
+1. Compressez tous les fichiers dans un fichier .zip
+2. Dans votre admin Shopify, allez dans Online Store > Themes
+3. Cliquez sur "Upload theme" et sélectionnez le fichier .zip
+4. Une fois uploadé, cliquez sur "Publish" pour activer le thème
 
-There are several ways of editing your application.
+## Structure du thème
 
-**Use Lovable**
+- `layout/` - Fichiers de mise en page principaux
+- `templates/` - Templates pour différents types de pages
+- `sections/` - Sections réutilisables
+- `snippets/` - Petits morceaux de code réutilisables
+- `assets/` - CSS, JS et images
+- `config/` - Fichiers de configuration
+- `locales/` - Traductions
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/bf53cea2-c113-47f5-88da-67c78d282cb3) and start prompting.
+## Sections disponibles
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Hero** - Section principale avec CTA
+- **Benefits** - Avantages du produit
+- **Testimonials** - Témoignages clients
+- **CTA** - Call-to-action final
+- **Header** - En-tête avec navigation
+- **Footer** - Pied de page
 
-**Use your preferred IDE**
+## Personnalisation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Toutes les sections sont entièrement personalisation via l'éditeur de thème Shopify.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Templates inclus
 
-Follow these steps:
+- Page d'accueil (index.liquid)
+- Page produit (product.liquid)
+- Collection (collection.liquid)
+- Panier (cart.liquid)
+- Recherche (search.liquid)
+- 404 (404.liquid)
+- Blog et articles
+- Pages clients (connexion, inscription, compte)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Support
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/bf53cea2-c113-47f5-88da-67c78d282cb3) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Pour toute question ou assistance, contactez l'équipe Zen Ring.

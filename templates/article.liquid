@@ -1,0 +1,22 @@
+{% comment %}
+  Template article
+{% endcomment %}
+
+<article class="container py-8 max-w-4xl mx-auto">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-bold mb-4">{{ article.title }}</h1>
+    <div class="text-gray-600">{{ article.published_at | date: '%B %d, %Y' }}</div>
+  </div>
+
+  {% if article.image %}
+    <img 
+      src="{{ article.image | img_url: '800x400' }}" 
+      alt="{{ article.image.alt }}"
+      class="w-full rounded-2xl mb-8"
+    >
+  {% endif %}
+
+  <div class="prose prose-lg max-w-none">
+    {{ article.content }}
+  </div>
+</article>

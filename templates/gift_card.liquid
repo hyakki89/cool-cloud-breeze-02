@@ -1,0 +1,25 @@
+{% comment %}
+  Template carte cadeau
+{% endcomment %}
+
+<div class="container py-8 max-w-md mx-auto text-center">
+  <div class="card p-8">
+    <h1 class="text-2xl font-bold mb-6">Carte Cadeau</h1>
+    
+    <div class="bg-gradient-to-br from-purple-400 to-pink-400 rounded-2xl p-6 text-white mb-6">
+      <div class="text-3xl font-bold mb-2">{{ gift_card.balance | money }}</div>
+      <div class="text-sm opacity-90">{{ gift_card.code }}</div>
+    </div>
+    
+    <p class="text-gray-600 mb-6">Utilisez ce code lors de votre commande</p>
+    
+    <button onclick="copyCode()" class="btn mb-4">Copier le code</button>
+    
+    <script>
+      function copyCode() {
+        navigator.clipboard.writeText('{{ gift_card.code }}');
+        alert('Code copié !');
+      }
+    </script>
+  </div>
+</div>

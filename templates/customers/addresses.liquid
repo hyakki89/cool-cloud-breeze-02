@@ -1,0 +1,86 @@
+{% comment %}
+  Adresses client
+{% endcomment %}
+
+<div class="container py-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-8">Mes adresses</h1>
+    
+    <div class="mb-6">
+      <button onclick="toggleAddressForm()" class="btn">
+        Ajouter une nouvelle adresse
+      </button>
+    </div>
+    
+    <!-- Formulaire nouvelle adresse -->
+    <div id="new-address-form" class="card p-6 mb-8 hidden">
+      <h2 class="text-xl font-semibold mb-4">Nouvelle adresse</h2>
+      {% form 'customer_address', customer.new_address %}
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Prénom</label>
+            <input type="text" name="address[first_name]" class="w-full px-3 py-2 border rounded-lg">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Nom</label>
+            <input type="text" name="address[last_name]" class="w-full px-3 py-2 border rounded-lg">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium mb-2">Adresse</label>
+            <input type="text" name="address[address1]" class="w-full px-3 py-2 border rounded-lg">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Ville</label>
+            <input type="text" name="address[city]" class="w-full px-3 py-2 border rounded-lg">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Code postal</label>
+            <input type="text" name="address[zip]" class="w-full px-3 py-2 border rounded-lg">
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn">Ajouter l'adresse</button>
+          <button type="button" onclick="toggleAddressForm()" class="ml-2 px-4 py-2 text-gray-600">
+            Annuler
+          </button>
+        </div>
+      {% endform %}
+    </div>
+    
+    <!-- Liste des adresses -->
+    <div class="grid md:grid-cols-2 gap-6">
+      {% for address in customer.addresses %}
+        <div class="card p-6">
+          <div class="mb-4">
+            <strong>{{ address.first_name }} {{ address.last_name }}</strong>
+            {% if address == customer.default_address %}
+              <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded ml-2">
+                Adresse par défaut
+              </span>
+            {% endif %}
+          </div>
+          <div class="text-gray-600 mb-4">
+            {{ address.address1 }}<br>
+            {{ address.city }}, {{ address.zip }}<br>
+            {{ address.country }}
+          </div>
+          <div class="flex gap-2">
+            <a href="{{ routes.account_addresses_url }}/{{ address.id }}" class="text-blue-600 hover:underline text-sm">
+              Modifier
+            </a>
+            <a href="{{ routes.account_addresses_url }}/{{ address.id }}" class="text-red-600 hover:underline text-sm">
+              Supprimer
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleAddressForm() {
+    const form = document.getElementById('new-address-form');
+    form.classList.toggle('hidden');
+  }
+</script>
