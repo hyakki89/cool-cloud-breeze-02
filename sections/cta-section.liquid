@@ -1,0 +1,162 @@
+{% comment %}
+  Section Call-to-Action finale
+{% endcomment %}
+
+<section class="cta py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
+  <div class="container mx-auto text-center">
+    <div class="max-w-4xl mx-auto">
+      
+      {% if section.settings.show_urgency_badge %}
+        <div class="inline-flex items-center gap-2 bg-red-100 px-4 py-2 rounded-full border border-red-200 mb-8">
+          <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+          <span class="text-sm font-medium text-red-700">
+            {{ section.settings.urgency_text }}
+          </span>
+        </div>
+      {% endif %}
+
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        {{ section.settings.title }}
+      </h2>
+
+      <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        {{ section.settings.subtitle }}
+      </p>
+
+      {% if section.settings.show_offer %}
+        <div class="bg-white bg-opacity-80 rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
+          <div class="text-center mb-6">
+            <div class="text-sm text-gray-500 mb-2">{{ section.settings.offer_label }}</div>
+            <div class="flex items-center justify-center gap-4 mb-4">
+              {% if section.settings.original_price %}
+                <span class="text-2xl text-gray-400 line-through">{{ section.settings.original_price }}</span>
+              {% endif %}
+              <span class="text-4xl font-bold text-blue-600">{{ section.settings.sale_price }}</span>
+              {% if section.settings.discount_badge %}
+                <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">{{ section.settings.discount_badge }}</span>
+              {% endif %}
+            </div>
+            <div class="text-sm text-gray-600">{{ section.settings.shipping_note }}</div>
+          </div>
+
+          <a href="{{ section.settings.cta_url | default: '#' }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full text-xl w-full sm:w-auto inline-block transition-colors mb-4">
+            {{ section.settings.cta_text }}
+          </a>
+
+          <div class="text-xs text-gray-500">{{ section.settings.security_note }}</div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_countdown %}
+        <div class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-2xl p-6 max-w-md mx-auto">
+          <div class="text-red-700 font-semibold mb-2">{{ section.settings.countdown_label }}</div>
+          <div class="text-2xl font-bold text-red-800 font-mono" id="countdown-timer">23:45:12</div>
+          <div class="text-xs text-red-600">{{ section.settings.countdown_units }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA Section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_urgency_badge",
+      "label": "Afficher le badge d'urgence",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texte d'urgence",
+      "default": "Stock limité - Plus que quelques pièces"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre",
+      "default": "Prêt à contrôler ton monde ?"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Sous-titre",
+      "default": "Rejoins la révolution de la technologie portable."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_offer",
+      "label": "Afficher l'offre spéciale",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "offer_label",
+      "label": "Label de l'offre",
+      "default": "Prix de lancement ✨"
+    },
+    {
+      "type": "text",
+      "id": "original_price",
+      "label": "Prix original",
+      "default": "29€"
+    },
+    {
+      "type": "text",
+      "id": "sale_price",
+      "label": "Prix de vente",
+      "default": "19€"
+    },
+    {
+      "type": "text",
+      "id": "discount_badge",
+      "label": "Badge de réduction",
+      "default": "-34%"
+    },
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Note livraison",
+      "default": "+ Livraison gratuite en France 🚚"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texte du bouton",
+      "default": "Je veux ma Zen Ring ⚡"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "text",
+      "id": "security_note",
+      "label": "Note sécurité",
+      "default": "Paiement 100% sécurisé • Garantie satisfait ou remboursé 15 jours"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Afficher le compte à rebours",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Label compte à rebours",
+      "default": "⏰ Offre limitée dans le temps !"
+    },
+    {
+      "type": "text",
+      "id": "countdown_units",
+      "label": "Unités de temps",
+      "default": "Heures • Minutes • Secondes"
+    }
+  ]
+}
+{% endschema %}
